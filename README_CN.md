@@ -26,12 +26,8 @@
 
     -   打开终端。
 
-    -   输入以下命令并回车：
+    -   输入以下命令并回车：`ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
 
-        ```shell
-        ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID
-        ```
-        
     -   将输出中的 UUID 复制为 `uuid` 参数。
 
 ### 运行程序

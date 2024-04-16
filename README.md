@@ -6,7 +6,7 @@
 
 This project aims to provide a custom ID generation function for `RustDesk`, making it easier for users to remember and manage devices. The main function is to simulate the official encryption algorithm, encrypt the user-entered custom ID, and output the encrypted ID.
 
-中文文档: [README-CN.md](https://github.com/Jxpro/custom-rustdesk/README–CN.md) 
+中文文档: [README_CN.md](https://github.com/Jxpro/custom-rustdesk/blob/main/README_CN.md) 
 
 ## Features
 -   Generate encrypted custom ID
@@ -26,12 +26,11 @@ This project aims to provide a custom ID generation function for `RustDesk`, mak
 2.  **MacOS:**
 
     -   Open Terminal.
-    -   Enter the following command and press Enter:
-
-    ```shell
-    ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID
-    ```
-
+    
+    -   Enter the following command and press Enter: 
+    
+        `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
+    
     -   Copy the UUID from the output as the `uuid` parameter.
 
 ### Run the program

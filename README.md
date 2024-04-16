@@ -42,4 +42,4 @@ cargo run -- --id 123456 --uuid 12345678-1234-1234-1234-123456789012
 
 ## 联系方式
 
-如果有任何问题，欢迎到 [github issue](https://github.com/Jxpro) 进行讨论，或发送电子邮件到 [jxpro@qq.com](mailto:jxpro@qq.com) 来联系我
+如果有任何问题，欢迎到 [github issue](https://github.com/Jxpro/custom-rustdesk/issues) 进行讨论，或发送电子邮件到 [jxpro@qq.com](mailto:jxpro@qq.com) 来联系我

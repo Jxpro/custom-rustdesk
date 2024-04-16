@@ -1,39 +1,47 @@
+extern crate clap;
 extern crate sodiumoxide;
+use clap::load_yaml;
+use clap::App;
 use sodiumoxide::base64;
 use sodiumoxide::crypto::secretbox;
 
 fn main() {
-    let enc_id: &str = "LTvZ+G4sqHwhzZcIwWUYlPUGs1bCf6EZ";
-    let custom_id: &str = "jokerxin";
+    let yaml = load_yaml!("cli.yml");
+    let matches = App::from_yaml(yaml).get_matches();
 
-    match encrypt(custom_id.as_bytes()) {
+    let custom_id = matches.value_of("id").unwrap();
+    let uuid = matches.value_of("uuid").unwrap();
+
+    match encrypt(custom_id.as_bytes(), uuid) {
         Ok(encrypted_string) => {
             println!("{:?} is encrypted to {:?}", custom_id, encrypted_string);
         }
         Err(_) => println!("Error occurred during encryption"),
     }
 
-    match decrypt(enc_id.as_bytes()) {
-        Ok(decrypted_bytes) => {
-            let decrypted_string = String::from_utf8(decrypted_bytes).unwrap();
-            println!("{:?} is decrypted to {:?}", enc_id, decrypted_string);
-        }
-        Err(_) => println!("Error occurred during decryption"),
-    }
+    // let enc_id: &str = "LTvZ+G4sqHwhzZcIwWUYlPUGs1bCf6EZ";
+    // match decrypt(enc_id.as_bytes(), uuid) {
+    //     Ok(decrypted_bytes) => {
+    //         let decrypted_string = String::from_utf8(decrypted_bytes).unwrap();
+    //         println!("{:?} is decrypted to {:?}", enc_id, decrypted_string);
+    //     }
+    //     Err(_) => println!("Error occurred during decryption"),
+    // }
 }
 
-fn decrypt(v: &[u8]) -> Result<Vec<u8>, ()> {
-    base64::decode(v, base64::Variant::Original).and_then(|v: Vec<u8>| symmetric_crypt(&v, false))
+// fn decrypt(v: &[u8], uuid: &str) -> Result<Vec<u8>, ()> {
+//     base64::decode(v, base64::Variant::Original)
+//         .and_then(|v: Vec<u8>| symmetric_crypt(&v, uuid, false))
+// }
+
+fn encrypt(v: &[u8], uuid: &str) -> Result<String, ()> {
+    symmetric_crypt(v, uuid, true).map(|v: Vec<u8>| base64::encode(v, base64::Variant::Original))
 }
 
-fn encrypt(v: &[u8]) -> Result<String, ()> {
-    symmetric_crypt(v, true).map(|v: Vec<u8>| base64::encode(v, base64::Variant::Original))
-}
-
-pub fn symmetric_crypt(data: &[u8], encrypt: bool) -> Result<Vec<u8>, ()> {
+pub fn symmetric_crypt(data: &[u8], uuid: &str, encrypt: bool) -> Result<Vec<u8>, ()> {
+    // UUID 作为密钥
     // (Windows) 来自注册表：HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography中的MachineGuid值
     // (MacOS) 来自注册表：HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography中的MachineGuid值
-    let uuid: &str = "15b1cfe5-c36c-46f7-93fa-dde4fcccd80e";
     // 将字符串转换为 Vec<u8>
     let mut keybuf: Vec<u8> = uuid.into();
     // 调整 Vec 大小以适应密钥长度要求

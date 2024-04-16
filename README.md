@@ -1,6 +1,9 @@
 # Rustdesk Custom ID Tool
 
 ## Introduction
+
+>   Note that if a certain ID is invalid and reset, please try more IDs. For example, on my Mac computer, IDs starting with 'mac' are all reset to other random ID.
+
 This project aims to provide a custom ID generation function for `Rustdesk`, making it easier for users to remember and manage devices. The main function is to simulate the official encryption algorithm, encrypt the user-entered custom ID, and output the encrypted ID.
 
 中文文档: [README-CN.md](https://github.com/Jxpro/custom-rustdesk/README–CN.md) 

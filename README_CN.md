@@ -11,6 +11,29 @@
 
 ## 使用方法
 
+### 获取 UUID
+
+1.  **Windows:**
+
+    -   按下 `Win + R` 打开运行对话框。
+    -   输入 `regedit` 并回车打开注册表编辑器。
+    -   导航到 `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography`。
+    -   将 `MachineGuid` 值复制为 `uuid` 参数。
+
+2.  **MacOS:**
+
+    -   打开终端。
+
+    -   输入以下命令并回车：
+
+        ```shell
+        ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID
+        ```
+        
+    -   将输出中的 UUID 复制为 `uuid` 参数。
+
+### 运行程序
+
 1.  将代码克隆到本地
 2.  运行 `cargo run -- --id $id --uuid $uuid` 命令
 3.  程序会输出加密后的 ID

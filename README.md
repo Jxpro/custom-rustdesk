@@ -10,11 +10,35 @@ This project aims to provide a custom ID generation function for `Rustdesk`, mak
 -   Use UUID as the encryption key
 
 ## Usage
+
+### Get UUID
+
+1.  **Windows:**
+
+    -   Press `Win + R` to open the Run dialog box.
+    -   Type `regedit` and press Enter to open the Registry Editor.
+    -   Navigate to `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography`.
+    -   Copy the `MachineGuid` value as the `uuid` parameter.
+
+2.  **MacOS:**
+
+    -   Open Terminal.
+    -   Enter the following command and press Enter:
+
+    ```shell
+    ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID
+    ```
+
+    -   Copy the UUID from the output as the `uuid` parameter.
+
+### Run the program
+
 1. Clone the code to your local machine
 2. Run  `cargo run -- --id $id --uuid $uuid`
 3. The program will output the encrypted ID
 
 Example:
+
 ```shell
 cargo run -- --id 123456 --uuid 12345678-1234-1234-1234-123456789012
 ```

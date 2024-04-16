@@ -39,9 +39,6 @@ fn encrypt(v: &[u8], uuid: &str) -> Result<String, ()> {
 }
 
 pub fn symmetric_crypt(data: &[u8], uuid: &str, encrypt: bool) -> Result<Vec<u8>, ()> {
-    // UUID 作为密钥
-    // (Windows) 来自注册表：HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography中的MachineGuid值
-    // (MacOS) 来自注册表：HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography中的MachineGuid值
     // 将字符串转换为 Vec<u8>
     let mut keybuf: Vec<u8> = uuid.into();
     // 调整 Vec 大小以适应密钥长度要求

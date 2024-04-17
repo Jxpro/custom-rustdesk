@@ -4,9 +4,21 @@
 
 >   Note that if a certain ID is invalid and reset, please try more IDs. For example, on my Mac computer, IDs starting with 'mac' are all reset to other random ID.
 
-This project aims to provide a custom ID generation function for `RustDesk`, making it easier for users to remember and manage devices. The main function is to simulate the official encryption algorithm, encrypt the user-entered custom ID, and output the encrypted ID.
-
 中文文档: [README_CN.md](https://github.com/Jxpro/custom-rustdesk/blob/main/README_CN.md) 
+
+This project aims to provide a custom ID generation function for `RustDesk`, making it easier for users to remember and manage devices. The primary function is to simulate the official encryption algorithm, encrypting user-entered custom IDs and outputting the encrypted ID. By replacing the `enc_id` field in the configuration file with this output, users can complete the setup.
+
+For MacOS, the configuration file is located at:
+
+-   `~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml`
+
+For Windows, the configuration file is located at:
+
+-   `C:\Users\username\AppData\Roaming\RustDesk\config\RustDesk.toml`
+
+When running in service mode in Windows, specified by `--service` :
+
+-   `C:\Windows\ServiceProfiles\LocalService\AppData\Roaming\RustDesk\config\RustDesk.toml`
 
 ## Features
 -   Generate encrypted custom ID

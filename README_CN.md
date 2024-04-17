@@ -4,7 +4,19 @@
 
 >   注意，如果某个ID无效被重置，请多试几个ID，比如我mac电脑上，以mac开头的ID都会被重置为其他随机ID
 
-本项目旨在为 `RustDesk `提供自定义 ID 生成功能，方便用户记忆和管理设备。主要功能为模拟官方加密算法，将用户输入的自定义 ID 加密并输出加密后的 ID。
+本项目旨在为 `RustDesk ` 提供自定义 ID 生成功能，方便用户记忆和管理设备。主要功能为模拟官方加密算法，将用户输入的自定义 ID 加密并输出加密后的 ID，将其替换到配置文件中的enc_id字段即可。
+
+`MacOS` 配置文件位置
+
+-   `~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml`
+
+`Windows` 配置文件位置
+
+-   `C:\Users\username\AppData\Roaming\RustDesk\config\RustDesk.toml`
+
+`Windows`下服务模式（指定`--service`）的配置文件，会覆盖`C:\Users\username`下的`RustDesk.toml`
+
+-   `C:\Windows\ServiceProfiles\LocalService\AppData\Roaming\RustDesk\config\RustDesk.toml`
 
 ## 功能
 

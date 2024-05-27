@@ -9,30 +9,42 @@ fn main() {
     let yaml = load_yaml!("cli.yml");
     let matches = App::from_yaml(yaml).get_matches();
 
-    let custom_id = matches.value_of("id").unwrap();
+    let has_id = matches.is_present("id");
+    let has_eid = matches.is_present("eid");
+    let has_uuid = matches.is_present("uuid");
     let uuid = matches.value_of("uuid").unwrap();
 
-    match encrypt(custom_id.as_bytes(), uuid) {
-        Ok(encrypted_string) => {
-            println!("{:?} is encrypted to {:?}", custom_id, encrypted_string);
-        }
-        Err(_) => println!("Error occurred during encryption"),
+    if has_uuid && ((has_id && has_eid) || (!has_id && !has_eid)) {
+        println!("Please provide only one of id or eid, where id is the custom id to encrypt and eid is the encrypted id to decrypt");
+        println!("For help use --help");
+        return;
     }
 
-    // let enc_id: &str = "LTvZ+G4sqHwhzZcIwWUYlPUGs1bCf6EZ";
-    // match decrypt(enc_id.as_bytes(), uuid) {
-    //     Ok(decrypted_bytes) => {
-    //         let decrypted_string = String::from_utf8(decrypted_bytes).unwrap();
-    //         println!("{:?} is decrypted to {:?}", enc_id, decrypted_string);
-    //     }
-    //     Err(_) => println!("Error occurred during decryption"),
-    // }
+    if has_id {
+        let custom_id = matches.value_of("id").unwrap();
+        match encrypt(custom_id.as_bytes(), uuid) {
+            Ok(encrypted_string) => {
+                println!("{:?} is encrypted to {:?}", custom_id, format!("00{}", encrypted_string));
+                println!("Please replace the id with the enc_id field in the config file");
+            }
+            Err(_) => println!("Error occurred during encryption"),
+        }
+    } else if has_eid {
+        let enc_id = matches.value_of("eid").unwrap();
+        match decrypt(enc_id[2..].as_bytes(), uuid) {
+            Ok(decrypted_bytes) => {
+                println!("{:?} is decrypted to {:?}", enc_id, String::from_utf8(decrypted_bytes).unwrap());
+                println!("Please compare the id with the enc_id field in the config file");
+            }
+            Err(_) => println!("Error occurred during decryption"),
+        }
+    }
 }
 
-// fn decrypt(v: &[u8], uuid: &str) -> Result<Vec<u8>, ()> {
-//     base64::decode(v, base64::Variant::Original)
-//         .and_then(|v: Vec<u8>| symmetric_crypt(&v, uuid, false))
-// }
+fn decrypt(v: &[u8], uuid: &str) -> Result<Vec<u8>, ()> {
+    base64::decode(v, base64::Variant::Original)
+        .and_then(|v: Vec<u8>| symmetric_crypt(&v, uuid, false))
+}
 
 fn encrypt(v: &[u8], uuid: &str) -> Result<String, ()> {
     symmetric_crypt(v, uuid, true).map(|v: Vec<u8>| base64::encode(v, base64::Variant::Original))

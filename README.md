@@ -4,7 +4,7 @@
 
 >   Note that if a certain ID is invalid and reset, please try more IDs. For example, on my Mac computer, IDs starting with 'mac' are all reset to other random ID.
 
-中文文档: [README_CN.md](https://github.com/Jxpro/custom-rustdesk/blob/main/README_CN.md) 
+中文文档: [README_CN.md](https://github.com/Jxpro/custom-rustdesk/blob/main/README_CN.md)
 
 This project aims to provide a custom ID generation function for `RustDesk`, making it easier for users to remember and manage devices. The primary function is to simulate the official encryption algorithm, encrypting user-entered custom IDs and outputting the encrypted ID. By replacing the `enc_id` field in the configuration file with this output, users can complete the setup.
 
@@ -22,7 +22,8 @@ When running in service mode in Windows, specified by `--service` :
 
 ## Features
 -   Generate encrypted custom ID
--   Use UUID as the encryption key
+-   Decrypt and validate encrypted ID
+-   Use UUID as the encryption and decryption key
 
 ## Usage
 
@@ -38,20 +39,24 @@ When running in service mode in Windows, specified by `--service` :
 2.  **MacOS:**
 
     -   Open Terminal.
-    
-    -   Enter the following command and press Enter: 
-    
+    -   Enter the following command and press Enter:
         `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
-    
     -   Copy the UUID from the output as the `uuid` parameter.
 
-### Run the program
+### Validate UUID
 
-1. Clone the code to your local machine
-2. Run  `cargo run -- --id $id --uuid $uuid`
-3. The program will output the encrypted ID
+1.  Clone the code locally.
+2.  Find the `enc_id` field in the respective configuration file.
+3.  Run the command `cargo run -- --eid $enc_id --uuid $uuid`.
+4.  The program will output the decrypted ID, compare it with the current ID to check consistency.
 
-Example:
+### Customize ID
+
+1.  Clone the code locally.
+2.  Run the command `cargo run -- --eid $custom_id --uuid $uuid`.
+3.  The program will output the encrypted ID, copy and replace it in the `enc_id` field of the configuration file.
+
+Example of program execution:
 
 ```shell
 cargo run -- --id 123456 --uuid 12345678-1234-1234-1234-123456789012

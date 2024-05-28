@@ -11,10 +11,9 @@ fn main() {
 
     let has_id = matches.is_present("id");
     let has_eid = matches.is_present("eid");
-    let has_uuid = matches.is_present("uuid");
     let uuid = matches.value_of("uuid").unwrap();
 
-    if has_uuid && ((has_id && has_eid) || (!has_id && !has_eid)) {
+    if !(has_id ^ has_eid) {
         println!("Please provide only one of id or eid, where id is the custom id to encrypt and eid is the encrypted id to decrypt");
         println!("For help use --help");
         return;

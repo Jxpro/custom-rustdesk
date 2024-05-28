@@ -39,8 +39,7 @@ When running in service mode in Windows, specified by `--service` :
 2.  **MacOS:**
 
     -   Open Terminal.
-    -   Enter the following command and press Enter:
-        `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
+    -   Enter the following command: `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
     -   Copy the UUID from the output as the `uuid` parameter.
 
 ### Validate UUID

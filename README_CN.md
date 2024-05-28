@@ -38,7 +38,7 @@
 2.  **MacOS:**
 
     -   打开终端。
-    -   输入以下命令并回车：`ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
+    -   输入以下命令：`ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
     -   将输出中的 UUID 复制为 `uuid` 参数。
 
 ### 验证 UUID

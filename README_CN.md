@@ -2,7 +2,7 @@
 
 ## 简介
 
->   注意，如果某个ID无效被重置，请多试几个ID，比如我mac电脑上，以mac开头的ID都会被重置为其他随机ID
+>   注意，如果某个ID无效被重置，可能是ID过短或被占用，请尝试使用其他ID
 
 本项目旨在为 `RustDesk` 提供自定义 ID 生成功能，方便用户记忆和管理设备。主要功能为模拟官方加密算法，将用户输入的自定义 ID 加密并输出加密后的 ID，将其替换到配置文件中的 `enc_id` 字段即可。
 
@@ -40,6 +40,8 @@
     -   打开终端。
     -   输入以下命令：`ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
     -   将输出中的 UUID 复制为 `uuid` 参数。
+
+你可以通过官方工具 [machine-uid](https://github.com/rustdesk-org/machine-uid) 获取更多完整信息
 
 ### 验证 UUID
 

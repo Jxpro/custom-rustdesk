@@ -2,7 +2,7 @@
 
 ## Introduction
 
->   Note that if a certain ID is invalid and reset, please try more IDs. For example, on my Mac computer, IDs starting with 'mac' are all reset to other random ID.
+>   Note that if a certain ID is invalid and reset, it may be that the ID is too short or occupied, please try a different ID.
 
 中文文档: [README_CN.md](https://github.com/Jxpro/custom-rustdesk/blob/main/README_CN.md)
 
@@ -41,6 +41,8 @@ When running in service mode in Windows, specified by `--service` :
     -   Open Terminal.
     -   Enter the following command: `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
     -   Copy the UUID from the output as the `uuid` parameter.
+
+You can get more information at the official tool [machine-uid](https://github.com/rustdesk-org/machine-uid)
 
 ### Validate UUID
 

@@ -29,6 +29,8 @@ When running in service mode in Windows, specified by `--service` :
 
 ### Get UUID
 
+>   You can get more information at the official tool [machine-uid](https://github.com/rustdesk-org/machine-uid)
+
 1.  **Windows:**
 
     -   Press `Win + R` to open the Run dialog box.
@@ -41,8 +43,6 @@ When running in service mode in Windows, specified by `--service` :
     -   Open Terminal.
     -   Enter the following command: `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
     -   Copy the UUID from the output as the `uuid` parameter.
-
-You can get more information at the official tool [machine-uid](https://github.com/rustdesk-org/machine-uid)
 
 ### Validate UUID
 

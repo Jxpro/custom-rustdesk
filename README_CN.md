@@ -28,6 +28,8 @@
 
 ### 获取 UUID
 
+>   你可以通过官方工具 [machine-uid](https://github.com/rustdesk-org/machine-uid) 获取更多完整信息
+
 1.  **Windows:**
 
     -   按下 `Win + R` 打开运行对话框。
@@ -40,8 +42,6 @@
     -   打开终端。
     -   输入以下命令：`ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
     -   将输出中的 UUID 复制为 `uuid` 参数。
-
-你可以通过官方工具 [machine-uid](https://github.com/rustdesk-org/machine-uid) 获取更多完整信息
 
 ### 验证 UUID
 

@@ -54,7 +54,7 @@ When running in service mode in Windows, specified by `--service` :
 ### Customize ID
 
 1.  Clone the code locally.
-2.  Run the command `cargo run -- --eid $custom_id --uuid $uuid`.
+2.  Run the command `cargo run -- --id $custom_id --uuid $uuid`.
 3.  The program will output the encrypted ID, copy and replace it in the `enc_id` field of the configuration file.
 
 Example of program execution:

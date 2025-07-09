@@ -20,4 +20,4 @@ args:
         long: uuid
         help: The UUID to use as the key
         takes_value: true
-        required: true
+        required: false

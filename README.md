@@ -24,10 +24,61 @@ When running in service mode in Windows, specified by `--service` :
 -   Generate encrypted custom ID
 -   Decrypt and validate encrypted ID
 -   Use UUID as the encryption and decryption key
+-   Interactive mode for easy operation
+-   Comprehensive help system
+-   Multi-language support (English/Chinese)
+-   Command-line interface with detailed parameter descriptions
 
 ## Usage
 
-### Get UUID
+### Interactive Mode
+
+Run without parameters to enter interactive mode:
+
+```bash
+cargo run
+```
+
+The interactive menu provides:
+1. **Encrypt Mode**: Generate encrypted ID from custom ID
+2. **Decrypt Mode**: Verify and decrypt encrypted ID
+3. **View Help**: Display comprehensive help information
+4. **Exit**: Quit the application
+
+### Command Line Mode
+
+The tool supports both command-line and interactive modes. For command-line usage:
+
+```bash
+# Generate encrypted ID
+cargo run -- --id <CustomID> --uuid <MachineUUID>
+
+# Verify encrypted ID
+cargo run -- --eid <EncryptedID> --uuid <MachineUUID>
+
+# Set language (en/zh)
+cargo run -- --lang zh
+
+# Show help
+cargo run -- --help
+```
+
+#### Command Line Parameters
+
+- `-i, --id <ID>`: Custom ID to encrypt
+- `-e, --eid <EID>`: Encrypted ID to decrypt
+- `-u, --uuid <UUID>`: UUID for encryption/decryption
+- `-l, --lang <LANG>`: Set the language (en/zh) [default: en]
+- `-h, --help`: Show detailed help information
+
+### Language Support
+
+The tool supports both English and Chinese:
+- Default language is English
+- Use `--lang zh` for Chinese interface
+- Language setting affects all output including help text and error messages
+
+### Getting UUID
 
 >   You can get more information at the official tool [machine-uid](https://github.com/rustdesk-org/machine-uid)
 

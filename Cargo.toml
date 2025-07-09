@@ -1,5 +1,5 @@
 [package]
-name = "custome-rustdesk"
+name = "custom-rustdesk"
 version = "0.1.0"
 edition = "2021"
 

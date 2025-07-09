@@ -93,6 +93,20 @@ cli_usage_title: "🔧 命令行用法："
 cli_usage_encrypt: "   🔐 生成加密 ID: cargo run -- --id <自定义ID> --uuid <机器UUID>"
 cli_usage_decrypt: "   🔍 验证加密 ID: cargo run -- --eid <加密ID> --uuid <机器UUID>"
 
+# 命令行参数
+cli_params_title: "📋 命令行参数："
+cli_param_id: "   -i, --id <ID>        要加密的自定义 ID"
+cli_param_eid: "   -e, --eid <EID>      要解密的加密 ID"
+cli_param_uuid: "   -u, --uuid <UUID>    用于加密/解密的 UUID"
+cli_param_lang: "   -l, --lang <LANG>    设置语言 (en/zh) [默认: en]"
+cli_param_help: "   -h, --help           显示详细帮助信息"
+
+# 参数示例
+cli_examples_title: "💡 参数示例："
+cli_example_encrypt: "   cargo run -- --id mycomputer --uuid 12345678-1234-1234-1234-123456789abc"
+cli_example_decrypt: "   cargo run -- --eid 00BkpwSc+zeBmpWiWmBdGVs5MEV2w9b9I= --uuid 12345678-1234-1234-1234-123456789abc"
+cli_example_help: "   cargo run -- --lang zh --help"
+
 # 配置文件位置
 config_file_location_title: "📁 配置文件位置："
 config_file_location_macos: "   🍎 macOS: ~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml"

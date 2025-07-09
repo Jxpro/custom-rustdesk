@@ -39,7 +39,7 @@ run_test() {
     log_info "Running test: $test_name"
     
     local output
-    if output=$(eval "$test_command" 2>&1) && echo "$output" | grep -q "$expected_pattern"; then
+    if output=$(eval "$test_command" 2>&1) && echo "$output" | grep -q -- "$expected_pattern"; then
         log_message "PASS" "$test_name" "$GREEN"
         ((PASSED_TESTS++))
         return 0
@@ -138,9 +138,24 @@ test_error_handling() {
 test_help_system() {
     log_info "=== Testing Help System ==="
     
+    # Test interactive help
     local help_cmd="echo '3' | cargo run --quiet --"
     run_test "Help system (English)" "$help_cmd --lang en" "Program Function"
     run_test "Help system (Chinese)" "$help_cmd --lang zh" "程序功能"
+    
+    # Test command line help flags
+    run_test "Command line help -h (English)" "cargo run --quiet -- -h" "Command Line Parameters"
+    run_test "Command line help --help (English)" "cargo run --quiet -- --help" "Command Line Parameters"
+    run_test "Command line help -h (Chinese)" "cargo run --quiet -- --lang zh -h" "命令行参数"
+    run_test "Command line help --help (Chinese)" "cargo run --quiet -- --lang zh --help" "命令行参数"
+    
+    # Test parameter descriptions in help
+    run_test "Parameter descriptions (English)" "cargo run --quiet -- -h" "--id"
+    run_test "Parameter descriptions (Chinese)" "cargo run --quiet -- --lang zh -h" "--id"
+    
+    # Test parameter examples in help
+    run_test "Parameter examples (English)" "cargo run --quiet -- -h" "Parameter Examples"
+    run_test "Parameter examples (Chinese)" "cargo run --quiet -- --lang zh -h" "参数示例"
 }
 
 # Test interactive mode

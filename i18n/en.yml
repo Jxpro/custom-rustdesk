@@ -93,6 +93,20 @@ cli_usage_title: "🔧 Command Line Usage:"
 cli_usage_encrypt: "   🔐 Generate encrypted ID: cargo run -- --id <CustomID> --uuid <MachineUUID>"
 cli_usage_decrypt: "   🔍 Verify encrypted ID: cargo run -- --eid <EncryptedID> --uuid <MachineUUID>"
 
+# Command Line Parameters
+cli_params_title: "📋 Command Line Parameters:"
+cli_param_id: "   -i, --id <ID>        Custom ID to encrypt"
+cli_param_eid: "   -e, --eid <EID>      Encrypted ID to decrypt"
+cli_param_uuid: "   -u, --uuid <UUID>    UUID for encryption/decryption"
+cli_param_lang: "   -l, --lang <LANG>    Set the language (en/zh) [default: en]"
+cli_param_help: "   -h, --help           Show this detailed help information"
+
+# Parameter Examples
+cli_examples_title: "💡 Parameter Examples:"
+cli_example_encrypt: "   cargo run -- --id mycomputer --uuid 12345678-1234-1234-1234-123456789abc"
+cli_example_decrypt: "   cargo run -- --eid 00BkpwSc+zeBmpWiWmBdGVs5MEV2w9b9I= --uuid 12345678-1234-1234-1234-123456789abc"
+cli_example_help: "   cargo run -- --lang zh --help"
+
 # Config File Location
 config_file_location_title: "📁 Config File Location:"
 config_file_location_macos: "   🍎 macOS: ~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml"

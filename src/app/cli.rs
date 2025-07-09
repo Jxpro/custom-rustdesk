@@ -6,6 +6,7 @@ use std::io::{self, Write};
 #[derive(Parser)]
 #[clap(name = "RustDesk ID Tool")]
 #[clap(about = "A tool for encrypting and decrypting RustDesk IDs", long_about = None)]
+#[clap(disable_help_flag = true)]
 pub struct Cli {
     /// Custom ID to encrypt
     #[clap(short, long)]
@@ -22,11 +23,21 @@ pub struct Cli {
     /// Set the language
     #[clap(short, long, default_value = "en")]
     lang: String,
+
+    /// Show detailed help information
+    #[clap(short, long, action = clap::ArgAction::SetTrue)]
+    help: bool,
 }
 
 pub fn run() {
     let cli = Cli::parse();
     rust_i18n::set_locale(&cli.lang);
+
+    // Check if help flag is set
+    if cli.help {
+        show_help(&cli.lang);
+        return;
+    }
 
     let has_id = cli.id.is_some();
     let has_eid = cli.eid.is_some();
@@ -273,6 +284,18 @@ fn show_help(_lang: &str) {
     println!("{}", t!("cli_usage_title"));
     println!("{}", t!("cli_usage_encrypt"));
     println!("{}", t!("cli_usage_decrypt"));
+    println!();
+    println!("{}", t!("cli_params_title"));
+    println!("{}", t!("cli_param_id"));
+    println!("{}", t!("cli_param_eid"));
+    println!("{}", t!("cli_param_uuid"));
+    println!("{}", t!("cli_param_lang"));
+    println!("{}", t!("cli_param_help"));
+    println!();
+    println!("{}", t!("cli_examples_title"));
+    println!("{}", t!("cli_example_encrypt"));
+    println!("{}", t!("cli_example_decrypt"));
+    println!("{}", t!("cli_example_help"));
     println!();
     println!("{}", t!("config_file_location_title"));
     println!("{}", t!("config_file_location_macos"));

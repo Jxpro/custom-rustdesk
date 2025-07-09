@@ -1,0 +1,110 @@
+# ============================================
+# Application Basic Info
+# ============================================
+app_title: "RustDesk Custom ID Tool"
+welcome: "🎯 Welcome to the RustDesk Custom ID Tool!"
+description: "📝 This tool helps you generate and verify custom IDs for RustDesk."
+security: "🔐 Uses your machine's UUID as the encryption key for security."
+thanks: "👋 Thanks for using, goodbye!"
+
+# ============================================
+# Main Menu Interface
+# ============================================
+choose_action: "🚀 Please choose an action:"
+generate_id: "  [1] 🔑 Generate Custom ID (Encrypt Mode)"
+generate_id_desc: "      Encrypt your custom ID into a RustDesk-compatible format."
+validate_id: "  [2] 🔍 Validate Encrypted ID (Decrypt Mode)"
+validate_id_desc: "      Verify if an existing encrypted ID is correct."
+help: "  [3] 📖 View Help"
+help_desc: "      Show detailed instructions and examples."
+exit: "  [0] 🚪 Exit"
+enter_choice: "Please enter your choice (0-3): "
+invalid_choice: "❌ Invalid choice, please enter a number between 0-3."
+
+# ============================================
+# Encryption Mode
+# ============================================
+encrypt_mode_title: "🔑 === Generate Custom ID (Encrypt Mode) ==="
+enter_custom_id: "✏️ Please enter your custom ID: "
+empty_id_error: "❌ Custom ID cannot be empty!"
+encrypt_success: "✅ Encryption successful!"
+original_id: "📋 Original ID: %{id}"
+encrypted_id: "🔐 Encrypted ID: %{id}"
+encrypt_error: "❌ An error occurred during encryption, please check your input."
+
+# Usage Instructions
+usage_instructions: "📝 Usage Instructions:"
+usage_1: "   1. 📋 Copy the encrypted ID above."
+usage_2: "   2. 📂 Open the RustDesk configuration file."
+usage_3: "   3. ✏️ Replace the enc_id field with the encrypted ID."
+usage_4: "   4. 🔄 Restart the RustDesk service."
+
+# ============================================
+# Decryption Mode
+# ============================================
+decrypt_mode_title: "🔍 === Validate Encrypted ID (Decrypt Mode) ==="
+enter_encrypted_id: "🔍 Please enter the encrypted ID to validate: "
+empty_encrypted_id_error: "❌ Encrypted ID cannot be empty!"
+invalid_encrypted_id_format_error: "❌ Invalid encrypted ID format!"
+decrypt_success: "✅ Decryption successful!"
+decrypt_success_title: "✅ Decryption successful!"
+decrypted_id: "🔑 Decrypted ID: %{id}"
+encrypted_id_label: "🔐 Encrypted ID: %{id}"
+original_id_label: "📋 Original ID: %{id}"
+compare_id_suggestion: "💡 Please compare the decrypted ID with your expected custom ID"
+decrypt_error: "❌ An error occurred during decryption, please check your input."
+invalid_decryption_result_error: "❌ Decryption result contains invalid characters, please check if the encrypted ID is correct"
+decryption_failed_error: "❌ Decryption failed, please check if the encrypted ID and UUID are correct"
+
+# ============================================
+# UUID Related
+# ============================================
+enter_uuid: "🆔 Please enter your UUID: "
+empty_uuid_error: "❌ UUID cannot be empty!"
+how_to_get_uuid: "📋 How to get UUID:"
+get_uuid_windows: "   🪟 Windows: MachineGuid in registry HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography"
+get_uuid_macos: "   🍎 macOS: Execute `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID` in terminal"
+
+# ============================================
+# Command Line Mode
+# ============================================
+error_uuid_required: "❌ Error: UUID is required for encryption or decryption."
+help_prompt: "💡 For help use --help"
+encrypt_success_with_id: "\"%{id}\" is encrypted to \"00%{encrypted_id}\""
+replace_id_prompt: "📝 Please replace the id with the enc_id field in the config file"
+encryption_error: "❌ Error occurred during encryption"
+decrypt_success_with_id: "\"%{id}\" is decrypted to \"%{decrypted_id}\""
+compare_id_prompt: "🔍 Please compare the id with the enc_id field in the config file"
+decryption_error: "❌ Error occurred during decryption"
+invalid_encrypted_id_format: "❌ Invalid encrypted ID format."
+
+# ============================================
+# Help System
+# ============================================
+help_title: "📖 === Help ==="
+
+# Program Function Description
+program_function_title: "🎯 Program Function:"
+program_function_desc1: "   This tool is used to generate and verify the custom ID of RustDesk, allowing you to use"
+program_function_desc2: "   an easy-to-remember ID instead of a randomly generated numeric ID."
+
+# Command Line Usage
+cli_usage_title: "🔧 Command Line Usage:"
+cli_usage_encrypt: "   🔐 Generate encrypted ID: cargo run -- --id <CustomID> --uuid <MachineUUID>"
+cli_usage_decrypt: "   🔍 Verify encrypted ID: cargo run -- --eid <EncryptedID> --uuid <MachineUUID>"
+
+# Config File Location
+config_file_location_title: "📁 Config File Location:"
+config_file_location_macos: "   🍎 macOS: ~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml"
+config_file_location_windows: "   🪟 Windows: C:\\Users\\Username\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml"
+
+# Notes
+notes_title: "⚠️  Notes:"
+note_1: "   1. 🎯 The UUID must match the machine running RustDesk"
+note_2: "   2. 📏 The custom ID should not be too short to avoid conflicts with other users"
+note_3: "   3. 🔄 The RustDesk service needs to be restarted after modifying the configuration file"
+
+# Get Help
+get_help_title: "📞 Get Help:"
+get_help_github: "   🐙 GitHub: https://github.com/Jxpro/custom-rustdesk"
+get_help_email: "   📧 Email: jxpro@qq.com"

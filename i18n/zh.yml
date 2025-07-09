@@ -1,0 +1,110 @@
+# ============================================
+# 应用基本信息
+# ============================================
+app_title: "RustDesk 自定义 ID 工具"
+welcome: "🎯 欢迎使用 RustDesk 自定义 ID 工具！"
+description: "📝 本工具可以帮助您生成和验证 RustDesk 的自定义 ID。"
+security: "🔐 使用您的机器 UUID 作为加密密钥，确保安全性。"
+thanks: "👋 感谢使用，再见！"
+
+# ============================================
+# 主菜单界面
+# ============================================
+choose_action: "🚀 请选择您要执行的操作："
+generate_id: "  [1] 🔑 生成自定义 ID (加密模式)"
+generate_id_desc: "      将您的自定义 ID 加密为 RustDesk 兼容的格式。"
+validate_id: "  [2] 🔍 验证加密 ID (解密模式)"
+validate_id_desc: "      验证一个已有的加密 ID 是否正确。"
+help: "  [3] 📖 查看使用帮助"
+help_desc: "      显示详细的使用说明和示例。"
+exit: "  [0] 🚪 退出"
+enter_choice: "请输入您的选择 (0-3): "
+invalid_choice: "❌ 无效选择，请输入 0-3 之间的数字。"
+
+# ============================================
+# 加密模式
+# ============================================
+encrypt_mode_title: "🔑 === 生成自定义 ID (加密模式) ==="
+enter_custom_id: "✏️ 请输入您的自定义 ID: "
+empty_id_error: "❌ 自定义 ID 不能为空！"
+encrypt_success: "✅ 加密成功！"
+original_id: "📋 原始 ID: %{id}"
+encrypted_id: "🔐 加密 ID: %{id}"
+encrypt_error: "❌ 加密过程中发生错误，请检查输入是否正确。"
+
+# 使用说明
+usage_instructions: "📝 使用说明："
+usage_1: "   1. 📋 复制上面的加密 ID。"
+usage_2: "   2. 📂 打开 RustDesk 配置文件。"
+usage_3: "   3. ✏️ 将 enc_id 字段替换为加密 ID。"
+usage_4: "   4. 🔄 重启 RustDesk 服务。"
+
+# ============================================
+# 解密模式
+# ============================================
+decrypt_mode_title: "🔍 === 验证加密 ID (解密模式) ==="
+enter_encrypted_id: "🔍 请输入需要验证的加密 ID: "
+empty_encrypted_id_error: "❌ 加密 ID 不能为空！"
+invalid_encrypted_id_format_error: "❌ 加密 ID 格式不正确！"
+decrypt_success: "✅ 解密成功！"
+decrypt_success_title: "✅ 解密成功！"
+decrypted_id: "🔑 解密 ID: %{id}"
+encrypted_id_label: "🔐 加密 ID: %{id}"
+original_id_label: "📋 原始 ID: %{id}"
+compare_id_suggestion: "💡 请将解密后的 ID 与您期望的自定义 ID 进行比较"
+decrypt_error: "❌ 解密过程中发生错误，请检查输入是否正确。"
+invalid_decryption_result_error: "❌ 解密结果包含无效字符，请检查加密 ID 是否正确"
+decryption_failed_error: "❌ 解密失败，请检查加密 ID 和 UUID 是否正确"
+
+# ============================================
+# UUID 相关
+# ============================================
+enter_uuid: "🆔 请输入您的 UUID: "
+empty_uuid_error: "❌ UUID 不能为空！"
+how_to_get_uuid: "📋 如何获取 UUID："
+get_uuid_windows: "   🪟 Windows: 注册表 HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography 中的 MachineGuid"
+get_uuid_macos: "   🍎 macOS: 终端执行 `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`"
+
+# ============================================
+# 命令行模式
+# ============================================
+error_uuid_required: "❌ 错误：加密或解密需要 UUID。"
+help_prompt: "💡 使用 --help 获取帮助"
+encrypt_success_with_id: "\"%{id}\" 已加密为 \"00%{encrypted_id}\""
+replace_id_prompt: "📝 请将配置文件中的 id 替换为 enc_id 字段"
+encryption_error: "❌ 加密过程中发生错误"
+decrypt_success_with_id: "\"%{id}\" 已解密为 \"%{decrypted_id}\""
+compare_id_prompt: "🔍 请将 id 与配置文件中的 enc_id 字段进行比较"
+decryption_error: "❌ 解密过程中发生错误"
+invalid_encrypted_id_format: "❌ 无效的加密 ID 格式。"
+
+# ============================================
+# 帮助系统
+# ============================================
+help_title: "📖 === 使用帮助 ==="
+
+# 程序功能说明
+program_function_title: "🎯 程序功能："
+program_function_desc1: "   本工具用于生成和验证 RustDesk 的自定义 ID，让您可以使用"
+program_function_desc2: "   容易记忆的 ID 来代替随机生成的数字 ID。"
+
+# 命令行用法
+cli_usage_title: "🔧 命令行用法："
+cli_usage_encrypt: "   🔐 生成加密 ID: cargo run -- --id <自定义ID> --uuid <机器UUID>"
+cli_usage_decrypt: "   🔍 验证加密 ID: cargo run -- --eid <加密ID> --uuid <机器UUID>"
+
+# 配置文件位置
+config_file_location_title: "📁 配置文件位置："
+config_file_location_macos: "   🍎 macOS: ~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml"
+config_file_location_windows: "   🪟 Windows: C:\\Users\\Username\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml"
+
+# 注意事项
+notes_title: "⚠️  注意事项："
+note_1: "   1. 🎯 UUID 必须与运行 RustDesk 的机器匹配"
+note_2: "   2. 📏 自定义 ID 不宜过短，避免与其他用户冲突"
+note_3: "   3. 🔄 修改配置文件后需要重启 RustDesk 服务"
+
+# 获取帮助
+get_help_title: "📞 获取帮助："
+get_help_github: "   🐙 GitHub: https://github.com/Jxpro/custom-rustdesk"
+get_help_email: "   📧 Email: jxpro@qq.com"

@@ -1,5 +1,6 @@
 use crate::core::crypto::{decrypt, encrypt};
 use clap::Parser;
+use rust_i18n::t;
 use std::io::{self, Write};
 
 #[derive(Parser)]
@@ -17,25 +18,30 @@ pub struct Cli {
     /// UUID for encryption/decryption
     #[clap(short, long)]
     uuid: Option<String>,
+
+    /// Set the language
+    #[clap(short, long, default_value = "en")]
+    lang: String,
 }
 
 pub fn run() {
     let cli = Cli::parse();
+    rust_i18n::set_locale(&cli.lang);
 
     let has_id = cli.id.is_some();
     let has_eid = cli.eid.is_some();
     let uuid_option = cli.uuid.as_deref();
 
     if !has_id && !has_eid && uuid_option.is_none() {
-        show_interactive_menu();
+        show_interactive_menu(&cli.lang);
         return;
     }
 
     let uuid = match uuid_option {
         Some(u) => u,
         None => {
-            println!("Error: UUID is required for encryption or decryption.");
-            println!("For help use --help");
+            println!("{}", t!("error_uuid_required"));
+            println!("{}", t!("help_prompt"));
             return;
         }
     };
@@ -45,12 +51,12 @@ pub fn run() {
             match encrypt(custom_id.as_bytes(), uuid) {
                 Ok(encrypted_string) => {
                     println!(
-                        "\"{}\" is encrypted to \"00{}\"",
-                        custom_id, encrypted_string
+                        "{}",
+                        t!("encrypt_success_with_id", id = custom_id, encrypted_id = encrypted_string)
                     );
-                    println!("Please replace the id with the enc_id field in the config file");
+                    println!("{}", t!("replace_id_prompt"));
                 }
-                Err(_) => println!("Error occurred during encryption"),
+                Err(_) => println!("{}", t!("encryption_error")),
             }
         }
     } else if has_eid {
@@ -59,22 +65,21 @@ pub fn run() {
                 match decrypt(&enc_id.as_bytes()[2..], uuid) {
                     Ok(decrypted_bytes) => {
                         println!(
-                            "\"{}\" is decrypted to \"{}\"",
-                            enc_id,
-                            String::from_utf8_lossy(&decrypted_bytes)
+                            "{}",
+                            t!("decrypt_success_with_id", id = enc_id, decrypted_id = String::from_utf8_lossy(&decrypted_bytes))
                         );
-                        println!("Please compare the id with the enc_id field in the config file");
+                        println!("{}", t!("compare_id_prompt"));
                     }
-                    Err(_) => println!("Error occurred during decryption"),
+                    Err(_) => println!("{}", t!("decryption_error")),
                 }
             } else {
-                println!("Invalid encrypted ID format.");
+                println!("{}", t!("invalid_encrypted_id_format"));
             }
         }
     }
 }
 
-pub fn show_interactive_menu() {
+pub fn show_interactive_menu(lang: &str) {
     // 显示 ASCII Logo
     println!(
         r#"
@@ -84,33 +89,34 @@ pub fn show_interactive_menu() {
 |  _ <| |_| \__ \ |_| |_| |  __/\__ \   < 
 |_| \_\\__,_|___/\__|____/ \___||___/_|\_\
                                         
-   自定义 ID 工具 v0.2.0
-"#
+   {} v0.2.0
+"#,
+        t!("app_title")
     );
 
     println!("═══════════════════════════════════════════════════════════");
-    println!("🎯 欢迎使用 RustDesk 自定义 ID 工具！");
-    println!("📝 本工具可以帮助您生成和验证 RustDesk 的自定义 ID");
-    println!("🔐 使用您的机器 UUID 作为加密密钥，确保安全性");
+    println!("{}", t!("welcome"));
+    println!("{}", t!("description"));
+    println!("{}", t!("security"));
     println!("═══════════════════════════════════════════════════════════");
     println!();
 
-    println!("请选择您要执行的操作：");
+    println!("{}", t!("choose_action"));
     println!();
-    println!("  [1] 🔑 生成自定义 ID (加密模式)");
-    println!("      将您的自定义 ID 加密为 RustDesk 可用格式");
+    println!("{}", t!("generate_id"));
+    println!("{}", t!("generate_id_desc"));
     println!();
-    println!("  [2] 🔍 验证加密 ID (解密模式)");
-    println!("      验证现有的加密 ID 是否正确");
+    println!("{}", t!("validate_id"));
+    println!("{}", t!("validate_id_desc"));
     println!();
-    println!("  [3] 📖 查看使用帮助");
-    println!("      显示详细的使用说明和示例");
+    println!("{}", t!("help"));
+    println!("{}", t!("help_desc"));
     println!();
-    println!("  [0] 🚪 退出程序");
+    println!("{}", t!("exit"));
     println!();
 
     loop {
-        print!("请输入您的选择 (0-3): ");
+        print!("{}", t!("enter_choice"));
         io::stdout().flush().unwrap();
 
         let mut input = String::new();
@@ -119,48 +125,48 @@ pub fn show_interactive_menu() {
 
         match choice {
             "1" => {
-                handle_encrypt_mode();
+                handle_encrypt_mode(lang);
                 break;
             }
             "2" => {
-                handle_decrypt_mode();
+                handle_decrypt_mode(lang);
                 break;
             }
             "3" => {
-                show_help();
+                show_help(lang);
                 break;
             }
             "0" => {
-                println!("👋 感谢使用，再见！");
+                println!("{}", t!("thanks"));
                 break;
             }
             _ => {
-                println!("❌ 无效选择，请输入 0-3 之间的数字");
+                println!("{}", t!("invalid_choice"));
                 println!();
             }
         }
     }
 }
 
-fn handle_encrypt_mode() {
+fn handle_encrypt_mode(lang: &str) {
     println!();
-    println!("🔑 === 生成自定义 ID (加密模式) ===");
+    println!("{}", t!("encrypt_mode_title"));
     println!();
 
     // 获取自定义 ID
-    print!("请输入您的自定义 ID: ");
+    print!("{}", t!("enter_custom_id"));
     io::stdout().flush().unwrap();
     let mut custom_id = String::new();
     io::stdin().read_line(&mut custom_id).unwrap();
     let custom_id = custom_id.trim();
 
     if custom_id.is_empty() {
-        println!("❌ 自定义 ID 不能为空！");
+        println!("{}", t!("empty_id_error"));
         return;
     }
 
     // 获取 UUID
-    let uuid = get_uuid_input();
+    let uuid = get_uuid_input(lang);
     if uuid.is_empty() {
         return;
     }
@@ -170,46 +176,46 @@ fn handle_encrypt_mode() {
         Ok(encrypted_string) => {
             let final_id = format!("00{}", encrypted_string);
             println!();
-            println!("✅ 加密成功！");
-            println!("📋 原始 ID: {}", custom_id);
-            println!("🔐 加密后的 ID: {}", final_id);
+            println!("{}", t!("encrypt_success"));
+            println!("{}", t!("original_id", id = custom_id));
+            println!("{}", t!("encrypted_id", id = final_id));
             println!();
-            println!("📝 使用说明：");
-            println!("   1. 复制上面的加密 ID");
-            println!("   2. 打开 RustDesk 配置文件");
-            println!("   3. 将 enc_id 字段替换为加密后的 ID");
-            println!("   4. 重启 RustDesk 服务");
+            println!("{}", t!("usage_instructions"));
+            println!("{}", t!("usage_1"));
+            println!("{}", t!("usage_2"));
+            println!("{}", t!("usage_3"));
+            println!("{}", t!("usage_4"));
         }
         Err(_) => {
-            println!("❌ 加密过程中发生错误，请检查输入是否正确");
+            println!("{}", t!("encrypt_error"));
         }
     }
 }
 
-fn handle_decrypt_mode() {
+fn handle_decrypt_mode(lang: &str) {
     println!();
-    println!("🔍 === 验证加密 ID (解密模式) ===");
+    println!("{}", t!("decrypt_mode_title"));
     println!();
 
     // 获取加密 ID
-    print!("请输入要验证的加密 ID: ");
+    print!("{}", t!("enter_encrypted_id"));
     io::stdout().flush().unwrap();
     let mut enc_id = String::new();
     io::stdin().read_line(&mut enc_id).unwrap();
     let enc_id = enc_id.trim();
 
     if enc_id.is_empty() {
-        println!("❌ 加密 ID 不能为空！");
+        println!("{}", t!("empty_encrypted_id_error"));
         return;
     }
 
     if enc_id.len() < 2 {
-        println!("❌ 加密 ID 格式不正确！");
+        println!("{}", t!("invalid_encrypted_id_format_error"));
         return;
     }
 
     // 获取 UUID
-    let uuid = get_uuid_input();
+    let uuid = get_uuid_input(lang);
     if uuid.is_empty() {
         return;
     }
@@ -219,68 +225,66 @@ fn handle_decrypt_mode() {
         Ok(decrypted_bytes) => match String::from_utf8(decrypted_bytes) {
             Ok(decrypted_id) => {
                 println!();
-                println!("✅ 解密成功！");
-                println!("🔐 加密 ID: {}", enc_id);
-                println!("📋 原始 ID: {}", decrypted_id);
+                println!("{}", t!("decrypt_success_title"));
+                println!("{}", t!("encrypted_id_label", id = enc_id));
+                println!("{}", t!("original_id_label", id = decrypted_id));
                 println!();
-                println!("💡 请将解密后的 ID 与您期望的自定义 ID 进行比较");
+                println!("{}", t!("compare_id_suggestion"));
             }
             Err(_) => {
-                println!("❌ 解密结果包含无效字符，请检查加密 ID 是否正确");
+                println!("{}", t!("invalid_decryption_result_error"));
             }
         },
         Err(_) => {
-            println!("❌ 解密失败，请检查加密 ID 和 UUID 是否正确");
+            println!("{}", t!("decryption_failed_error"));
         }
     }
 }
 
-fn get_uuid_input() -> String {
+fn get_uuid_input(_lang: &str) -> String {
     println!();
-    println!("📋 如何获取 UUID：");
-    println!(
-        "   Windows: 注册表 HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography 中的 MachineGuid"
-    );
-    println!("   macOS: 终端执行 ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID");
+    println!("{}", t!("how_to_get_uuid"));
+    println!("{}", t!("get_uuid_windows"));
+    println!("{}", t!("get_uuid_macos"));
     println!();
 
-    print!("请输入您的机器 UUID: ");
+    print!("{}", t!("enter_uuid"));
     io::stdout().flush().unwrap();
     let mut uuid = String::new();
     io::stdin().read_line(&mut uuid).unwrap();
     let uuid = uuid.trim().to_string();
 
     if uuid.is_empty() {
-        println!("❌ UUID 不能为空！");
+        println!("{}", t!("empty_uuid_error"));
         return String::new();
     }
 
     uuid
 }
 
-fn show_help() {
+fn show_help(_lang: &str) {
     println!();
-    println!("📖 === 使用帮助 ===");
+    println!("{}", t!("help_title"));
     println!();
-    println!("🎯 程序功能：");
-    println!("   本工具用于生成和验证 RustDesk 的自定义 ID，让您可以使用");
-    println!("   容易记忆的 ID 来代替随机生成的数字 ID。");
+    println!("{}", t!("program_function_title"));
+    println!("{}", t!("program_function_desc1"));
+    println!("{}", t!("program_function_desc2"));
     println!();
-    println!("🔧 命令行用法：");
-    println!("   生成加密 ID: cargo run -- --id <自定义ID> --uuid <机器UUID>");
-    println!("   验证加密 ID: cargo run -- --eid <加密ID> --uuid <机器UUID>");
+    println!("{}", t!("cli_usage_title"));
+    println!("{}", t!("cli_usage_encrypt"));
+    println!("{}", t!("cli_usage_decrypt"));
     println!();
-    println!("📁 配置文件位置：");
-    println!("   macOS: ~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml");
-    println!("   Windows: C:\\Users\\用户名\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml");
+    println!("{}", t!("config_file_location_title"));
+    println!("{}", t!("config_file_location_macos"));
+    println!("{}", t!("config_file_location_windows"));
     println!();
-    println!("⚠️  注意事项：");
-    println!("   1. UUID 必须与运行 RustDesk 的机器匹配");
-    println!("   2. 自定义 ID 不宜过短，避免与其他用户冲突");
-    println!("   3. 修改配置文件后需要重启 RustDesk 服务");
+    println!("{}", t!("notes_title"));
+    println!("{}", t!("note_1"));
+    println!("{}", t!("note_2"));
+    println!("{}", t!("note_3"));
     println!();
-    println!("📞 获取帮助：");
-    println!("   GitHub: https://github.com/Jxpro/custom-rustdesk");
-    println!("   Email: jxpro@qq.com");
+    println!("{}", t!("get_help_title"));
+    println!("{}", t!("get_help_github"));
+    println!("{}", t!("get_help_email"));
     println!();
 }

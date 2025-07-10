@@ -28,6 +28,69 @@
 *   多语言支持（中文/英文）
 *   命令行界面，包含详细参数说明
 
+## 安装与快速开始
+
+### 方式一：下载预编译二进制文件（推荐）
+
+最简单的使用方式是从我们的发布页面下载预编译的二进制文件：
+
+**📥 [下载最新版本](https://github.com/Jxpro/custom-rustdesk/releases)**
+
+支持的平台：
+- **Linux**: `custom-rustdesk-linux-x86_64-gnu`, `custom-rustdesk-linux-aarch64-gnu`
+- **Linux (MUSL)**: `custom-rustdesk-linux-x86_64-musl`, `custom-rustdesk-linux-aarch64-musl`
+- **Windows**: `custom-rustdesk-windows-x86_64.exe`, `custom-rustdesk-windows-aarch64.exe`
+- **macOS**: `custom-rustdesk-macos-universal`（支持 Intel 和 Apple Silicon）
+
+#### 预编译二进制文件快速开始：
+
+1. 下载适合您平台的二进制文件
+2. 添加执行权限（Linux/macOS）：`chmod +x custom-rustdesk-*`
+3. 直接运行：
+   ```bash
+   # 交互式模式
+   ./custom-rustdesk-macos-universal
+   
+   # 命令行模式
+   ./custom-rustdesk-macos-universal --id 123456 --uuid your-uuid-here
+   ```
+
+### 方式二：从源码构建
+
+如果您希望从源码构建或需要修改代码：
+
+#### 前置要求
+- [Rust](https://rustup.rs/)（最新稳定版本）
+- Git
+
+#### 构建步骤
+
+1. **克隆仓库：**
+   ```bash
+   git clone https://github.com/Jxpro/custom-rustdesk.git
+   cd custom-rustdesk
+   ```
+
+2. **构建项目：**
+   ```bash
+   cargo build --release
+   ```
+
+3. **运行构建的二进制文件：**
+   ```bash
+   # 交互式模式
+   cargo run --release
+   
+   # 或直接运行构建的二进制文件
+   ./target/release/custom-rustdesk
+   ```
+
+#### 开发构建
+开发时可以直接使用 cargo 运行：
+```bash
+cargo run
+```
+
 ## 使用方法
 
 ### 交互式模式
@@ -35,6 +98,10 @@
 不带参数运行进入交互式模式：
 
 ```bash
+# 使用预编译二进制文件
+./custom-rustdesk-macos-universal
+
+# 或从源码运行
 cargo run
 ```
 
@@ -49,6 +116,20 @@ cargo run
 工具支持命令行和交互式两种模式。命令行使用方法：
 
 ```bash
+# 使用预编译二进制文件：
+# 生成加密 ID
+./custom-rustdesk-macos-universal --id <自定义ID> --uuid <机器UUID>
+
+# 验证加密 ID
+./custom-rustdesk-macos-universal --eid <加密ID> --uuid <机器UUID>
+
+# 设置语言（en/zh）
+./custom-rustdesk-macos-universal --lang zh
+
+# 显示帮助
+./custom-rustdesk-macos-universal --help
+
+# 从源码运行：
 # 生成加密 ID
 cargo run -- --id <自定义ID> --uuid <机器UUID>
 
@@ -96,20 +177,38 @@ cargo run -- --help
 
 ### 验证 UUID
 
-1.  将代码克隆到本地
+1.  下载预编译二进制文件或将代码克隆到本地
 2.  在对应的配置文件中找到 `enc_id` 字段
-3.  运行 `cargo run -- --eid $enc_id --uuid $uuid` 命令
+3.  运行验证命令：
+    ```bash
+    # 使用预编译二进制文件
+    ./custom-rustdesk-macos-universal --eid $enc_id --uuid $uuid
+    
+    # 或从源码运行
+    cargo run -- --eid $enc_id --uuid $uuid
+    ```
 4.  程序会输出解密后的 ID，与当前 ID 比较是否一致
 
 ### 自定义ID
 
-1.  将代码克隆到本地
-2.  运行 `cargo run -- --eid $custom_id --uuid $uuid` 命令
+1.  下载预编译二进制文件或将代码克隆到本地
+2.  运行加密命令：
+    ```bash
+    # 使用预编译二进制文件
+    ./custom-rustdesk-macos-universal --id $custom_id --uuid $uuid
+    
+    # 或从源码运行
+    cargo run -- --id $custom_id --uuid $uuid
+    ```
 3.  程序会输出加密后的 ID，复制并替换到配置文件中的 `enc_id` 字段
 
 程序运行示例：
 
-```shell
+```bash
+# 使用预编译二进制文件
+./custom-rustdesk-macos-universal --id 123456 --uuid 12345678-1234-1234-1234-123456789012
+
+# 从源码运行
 cargo run -- --id 123456 --uuid 12345678-1234-1234-1234-123456789012
 ```
 

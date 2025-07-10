@@ -29,6 +29,69 @@ When running in service mode in Windows, specified by `--service` :
 -   Multi-language support (English/Chinese)
 -   Command-line interface with detailed parameter descriptions
 
+## Installation & Getting Started
+
+### Option 1: Download Pre-built Binaries (Recommended)
+
+The easiest way to get started is to download the pre-built binaries from our releases page:
+
+**📥 [Download Latest Release](https://github.com/Jxpro/custom-rustdesk/releases)**
+
+Available platforms:
+- **Linux**: `custom-rustdesk-linux-x86_64-gnu`, `custom-rustdesk-linux-aarch64-gnu`
+- **Linux (MUSL)**: `custom-rustdesk-linux-x86_64-musl`, `custom-rustdesk-linux-aarch64-musl`
+- **Windows**: `custom-rustdesk-windows-x86_64.exe`, `custom-rustdesk-windows-aarch64.exe`
+- **macOS**: `custom-rustdesk-macos-universal` (supports both Intel and Apple Silicon)
+
+#### Quick Start with Pre-built Binary:
+
+1. Download the appropriate binary for your platform
+2. Make it executable (Linux/macOS): `chmod +x custom-rustdesk-*`
+3. Run directly:
+   ```bash
+   # Interactive mode
+   ./custom-rustdesk-macos-universal
+   
+   # Command line mode
+   ./custom-rustdesk-macos-universal --id 123456 --uuid your-uuid-here
+   ```
+
+### Option 2: Build from Source
+
+If you prefer to build from source or need to modify the code:
+
+#### Prerequisites
+- [Rust](https://rustup.rs/) (latest stable version)
+- Git
+
+#### Build Steps
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Jxpro/custom-rustdesk.git
+   cd custom-rustdesk
+   ```
+
+2. **Build the project:**
+   ```bash
+   cargo build --release
+   ```
+
+3. **Run the built binary:**
+   ```bash
+   # Interactive mode
+   cargo run --release
+   
+   # Or run the built binary directly
+   ./target/release/custom-rustdesk
+   ```
+
+#### Development Build
+For development purposes, you can run directly with cargo:
+```bash
+cargo run
+```
+
 ## Usage
 
 ### Interactive Mode
@@ -36,6 +99,10 @@ When running in service mode in Windows, specified by `--service` :
 Run without parameters to enter interactive mode:
 
 ```bash
+# Using pre-built binary
+./custom-rustdesk-macos-universal
+
+# Or from source
 cargo run
 ```
 
@@ -50,6 +117,20 @@ The interactive menu provides:
 The tool supports both command-line and interactive modes. For command-line usage:
 
 ```bash
+# Using pre-built binary:
+# Generate encrypted ID
+./custom-rustdesk-macos-universal --id <CustomID> --uuid <MachineUUID>
+
+# Verify encrypted ID
+./custom-rustdesk-macos-universal --eid <EncryptedID> --uuid <MachineUUID>
+
+# Set language (en/zh)
+./custom-rustdesk-macos-universal --lang zh
+
+# Show help
+./custom-rustdesk-macos-universal --help
+
+# From source:
 # Generate encrypted ID
 cargo run -- --id <CustomID> --uuid <MachineUUID>
 
@@ -97,20 +178,38 @@ The tool supports both English and Chinese:
 
 ### Validate UUID
 
-1.  Clone the code locally.
+1.  Download the pre-built binary or clone the code locally.
 2.  Find the `enc_id` field in the respective configuration file.
-3.  Run the command `cargo run -- --eid $enc_id --uuid $uuid`.
+3.  Run the validation command:
+    ```bash
+    # Using pre-built binary
+    ./custom-rustdesk-macos-universal --eid $enc_id --uuid $uuid
+    
+    # Or from source
+    cargo run -- --eid $enc_id --uuid $uuid
+    ```
 4.  The program will output the decrypted ID, compare it with the current ID to check consistency.
 
 ### Customize ID
 
-1.  Clone the code locally.
-2.  Run the command `cargo run -- --id $custom_id --uuid $uuid`.
+1.  Download the pre-built binary or clone the code locally.
+2.  Run the encryption command:
+    ```bash
+    # Using pre-built binary
+    ./custom-rustdesk-macos-universal --id $custom_id --uuid $uuid
+    
+    # Or from source
+    cargo run -- --id $custom_id --uuid $uuid
+    ```
 3.  The program will output the encrypted ID, copy and replace it in the `enc_id` field of the configuration file.
 
 Example of program execution:
 
-```shell
+```bash
+# Using pre-built binary
+./custom-rustdesk-macos-universal --id 123456 --uuid 12345678-1234-1234-1234-123456789012
+
+# From source
 cargo run -- --id 123456 --uuid 12345678-1234-1234-1234-123456789012
 ```
 

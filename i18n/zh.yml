@@ -65,6 +65,15 @@ how_to_get_uuid: "📋 如何获取 UUID："
 get_uuid_windows: "   🪟 Windows: 注册表 HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography 中的 MachineGuid"
 get_uuid_macos: "   🍎 macOS: 终端执行 `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`"
 
+# 自动 UUID 检测
+auto_detected_uuid: "🤖 自动检测到机器 UUID："
+detected_uuid_label: "📱 检测到的 UUID"
+confirm_uuid_prompt: "✅ 使用此 UUID？(y/n): "
+invalid_choice_yn: "❌ 请输入 'y' 表示是，'n' 表示否。"
+auto_uuid_failed: "⚠️ 自动检测机器 UUID 失败"
+manual_uuid_required: "📝 请手动输入 UUID："
+operation_cancelled: "❌ 用户取消操作。"
+
 # ============================================
 # 命令行模式
 # ============================================

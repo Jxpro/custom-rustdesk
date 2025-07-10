@@ -161,13 +161,35 @@ The tool supports both English and Chinese:
 
 ### 🔍 Getting UUID
 
->   You can get more information at the official tool [machine-uid](https://github.com/rustdesk-org/machine-uid)
+#### 🤖 Automatic UUID Detection (Recommended)
+
+**This tool now supports automatic machine UUID detection!** This is the simplest and most convenient way:
+
+- **Interactive Mode**: The program will automatically detect and display the machine UUID when running, asking whether to use it
+- **Command Line Mode**: When the `--uuid` parameter is not provided, it automatically detects and confirms usage
+- **Cross-Platform Support**: Supports Windows, macOS, and Linux systems
+- **User Confirmation**: After detecting the UUID, it will ask for user confirmation, pressing Enter defaults to "yes"
+
+Usage examples:
+```bash
+# Automatic UUID detection (recommended method)
+./custom-rustdesk-macos-universal --id 123456
+# The program will automatically detect UUID and ask for confirmation
+
+# Interactive mode also supports automatic detection
+./custom-rustdesk-macos-universal
+```
+
+#### 📋 Manual UUID Retrieval
+
+If you need to manually obtain or verify UUID for configuring RustDesk on other devices, please refer to the following methods:
+
+>   You can also get more complete information through the official tool [machine-uid](https://github.com/rustdesk-org/machine-uid)
 
 1.  **Windows:**
 
-    -   Press `Win + R` to open the Run dialog box.
-    -   Type `regedit` and press Enter to open the Registry Editor.
-    -   Navigate to `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography`.
+    -   Open Terminal.
+    -   Enter the following command: `(Get-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography).MachineGuid`
     -   Copy the `MachineGuid` value as the `uuid` parameter.
 
 2.  **MacOS:**
@@ -175,6 +197,12 @@ The tool supports both English and Chinese:
     -   Open Terminal.
     -   Enter the following command: `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
     -   Copy the UUID from the output as the `uuid` parameter.
+
+3.  **Linux:**
+
+    -   Open Terminal.
+    -   Enter the following command: `cat /etc/machine-id` or `cat /var/lib/dbus/machine-id`
+    -   Copy the machine ID from the output as the `uuid` parameter.
 
 ### ✅ Validate UUID
 
@@ -192,25 +220,50 @@ The tool supports both English and Chinese:
 
 ### 🎯 Customize ID
 
-1.  Download the pre-built binary or clone the code locally.
-2.  Run the encryption command:
+#### 🚀 Using Automatic UUID Detection (Recommended)
+
+1.  Download the pre-built binary or clone the code locally
+2.  Run the encryption command (no need to manually provide UUID):
     ```bash
     # Using pre-built binary
-    ./custom-rustdesk-macos-universal --id $custom_id --uuid $uuid
+    ./custom-rustdesk-macos-universal --id MyComputer
     
     # Or from source
-    cargo run -- --id $custom_id --uuid $uuid
+    cargo run -- --id MyComputer
     ```
-3.  The program will output the encrypted ID, copy and replace it in the `enc_id` field of the configuration file.
+3.  The program will automatically detect UUID and ask for confirmation, press Enter or type `y` to confirm
+4.  The program outputs the encrypted ID, copy and replace it in the `enc_id` field of the configuration file
 
-Example of program execution:
+#### 📋 Manual UUID Specification
+
+If you need to use a specific UUID, you can specify it manually:
 
 ```bash
 # Using pre-built binary
-./custom-rustdesk-macos-universal --id 123456 --uuid 12345678-1234-1234-1234-123456789012
+./custom-rustdesk-macos-universal --id MyComputer --uuid 12345678-1234-1234-1234-123456789012
 
 # From source
-cargo run -- --id 123456 --uuid 12345678-1234-1234-1234-123456789012
+cargo run -- --id MyComputer --uuid 12345678-1234-1234-1234-123456789012
+```
+
+#### 💡 Program Execution Examples
+
+**Automatic Detection Mode:**
+```bash
+$ ./custom-rustdesk-macos-universal --id TestComputer
+🤖 Automatically detected machine UUID:
+📱 Detected UUID: 3C17252C-4A25-54AB-8A92-B88D3D6665AA
+
+✅ Use this UUID? (y/n): [Press Enter or type y]
+"TestComputer" is encrypted to "00u33upzDoDQeMfJZ36o3owBtJ0Ip8qKr2dff8qsbAug=="
+📝 Please replace the id with the enc_id field in the config file
+```
+
+**Manual Specification Mode:**
+```bash
+$ ./custom-rustdesk-macos-universal --id TestComputer --uuid 12345678-1234-1234-1234-123456789012
+"TestComputer" is encrypted to "00M72xC5id8C/F+IsG6VOWs5MEV2xhPI/nBBo="
+📝 Please replace the id with the enc_id field in the config file
 ```
 
 ## 🔐 Encryption Process

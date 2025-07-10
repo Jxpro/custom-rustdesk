@@ -65,6 +65,15 @@ how_to_get_uuid: "📋 How to get UUID:"
 get_uuid_windows: "   🪟 Windows: MachineGuid in registry HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography"
 get_uuid_macos: "   🍎 macOS: Execute `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID` in terminal"
 
+# Auto UUID Detection
+auto_detected_uuid: "🤖 Automatically detected machine UUID:"
+detected_uuid_label: "📱 Detected UUID"
+confirm_uuid_prompt: "✅ Use this UUID? (y/n): "
+invalid_choice_yn: "❌ Please enter 'y' for yes or 'n' for no."
+auto_uuid_failed: "⚠️ Failed to automatically detect machine UUID"
+manual_uuid_required: "📝 Please enter UUID manually:"
+operation_cancelled: "❌ Operation cancelled by user."
+
 # ============================================
 # Command Line Mode
 # ============================================

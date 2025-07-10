@@ -24,6 +24,7 @@ When running in service mode in Windows, specified by `--service` :
 -   🔒 Generate encrypted custom ID
 -   🔓 Decrypt and validate encrypted ID
 -   🔑 Use UUID as the encryption and decryption key
+-   📋 Automatic clipboard copy for encrypted/decrypted results
 -   💬 Interactive mode for easy operation
 -   📚 Comprehensive help system
 -   🌍 Multi-language support (English/Chinese)
@@ -256,6 +257,7 @@ $ ./custom-rustdesk-macos-universal --id TestComputer
 
 ✅ Use this UUID? (y/n): [Press Enter or type y]
 "TestComputer" is encrypted to "00u33upzDoDQeMfJZ36o3owBtJ0Ip8qKr2dff8qsbAug=="
+✅ Copied to clipboard
 📝 Please replace the id with the enc_id field in the config file
 ```
 
@@ -263,6 +265,7 @@ $ ./custom-rustdesk-macos-universal --id TestComputer
 ```bash
 $ ./custom-rustdesk-macos-universal --id TestComputer --uuid 12345678-1234-1234-1234-123456789012
 "TestComputer" is encrypted to "00M72xC5id8C/F+IsG6VOWs5MEV2xhPI/nBBo="
+✅ Copied to clipboard
 📝 Please replace the id with the enc_id field in the config file
 ```
 

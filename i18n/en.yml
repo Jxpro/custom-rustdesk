@@ -32,7 +32,9 @@ original_id: "📋 Original ID: %{id}"
 encrypted_id: "🔐 Encrypted ID: %{id}"
 encrypt_error: "❌ An error occurred during encryption, please check your input."
 
+# ============================================
 # Usage Instructions
+# ============================================
 usage_instructions: "📝 Usage Instructions:"
 usage_1: "   1. 📋 Copy the encrypted ID above."
 usage_2: "   2. 📂 Open the RustDesk configuration file."
@@ -57,6 +59,12 @@ invalid_decryption_result_error: "❌ Decryption result contains invalid charact
 decryption_failed_error: "❌ Decryption failed, please check if the encrypted ID and UUID are correct"
 
 # ============================================
+# General Operation Messages
+# ============================================
+clipboard_copy_success: "✅ Copied to clipboard"
+clipboard_copy_failed: "⚠️ Failed to copy to clipboard"
+
+# ============================================
 # UUID Related
 # ============================================
 enter_uuid: "🆔 Please enter your UUID: "
@@ -65,7 +73,9 @@ how_to_get_uuid: "📋 How to get UUID:"
 get_uuid_windows: "   🪟 Windows: MachineGuid in registry HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography"
 get_uuid_macos: "   🍎 macOS: Execute `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID` in terminal"
 
+# ============================================
 # Auto UUID Detection
+# ============================================
 auto_detected_uuid: "🤖 Automatically detected machine UUID:"
 detected_uuid_label: "📱 Detected UUID"
 confirm_uuid_prompt: "✅ Use this UUID? (y/n): "
@@ -92,17 +102,23 @@ invalid_encrypted_id_format: "❌ Invalid encrypted ID format."
 # ============================================
 help_title: "📖 === Help ==="
 
+# ============================================
 # Program Function Description
+# ============================================
 program_function_title: "🎯 Program Function:"
 program_function_desc1: "   This tool is used to generate and verify the custom ID of RustDesk, allowing you to use"
 program_function_desc2: "   an easy-to-remember ID instead of a randomly generated numeric ID."
 
+# ============================================
 # Command Line Usage
+# ============================================
 cli_usage_title: "🔧 Command Line Usage:"
 cli_usage_encrypt: "   🔐 Generate encrypted ID: cargo run -- --id <CustomID> --uuid <MachineUUID>"
 cli_usage_decrypt: "   🔍 Verify encrypted ID: cargo run -- --eid <EncryptedID> --uuid <MachineUUID>"
 
+# ============================================
 # Command Line Parameters
+# ============================================
 cli_params_title: "📋 Command Line Parameters:"
 cli_param_id: "   -i, --id <ID>        Custom ID to encrypt"
 cli_param_eid: "   -e, --eid <EID>      Encrypted ID to decrypt"
@@ -110,24 +126,32 @@ cli_param_uuid: "   -u, --uuid <UUID>    UUID for encryption/decryption"
 cli_param_lang: "   -l, --lang <LANG>    Set the language (en/zh) [default: en]"
 cli_param_help: "   -h, --help           Show this detailed help information"
 
+# ============================================
 # Parameter Examples
+# ============================================
 cli_examples_title: "💡 Parameter Examples:"
 cli_example_encrypt: "   cargo run -- --id mycomputer --uuid 12345678-1234-1234-1234-123456789abc"
 cli_example_decrypt: "   cargo run -- --eid 00BkpwSc+zeBmpWiWmBdGVs5MEV2w9b9I= --uuid 12345678-1234-1234-1234-123456789abc"
 cli_example_help: "   cargo run -- --lang zh --help"
 
+# ============================================
 # Config File Location
+# ============================================
 config_file_location_title: "📁 Config File Location:"
 config_file_location_macos: "   🍎 macOS: ~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml"
 config_file_location_windows: "   🪟 Windows: C:\\Users\\Username\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml"
 
+# ============================================
 # Notes
+# ============================================
 notes_title: "⚠️  Notes:"
 note_1: "   1. 🎯 The UUID must match the machine running RustDesk"
 note_2: "   2. 📏 The custom ID should not be too short to avoid conflicts with other users"
 note_3: "   3. 🔄 The RustDesk service needs to be restarted after modifying the configuration file"
 
+# ============================================
 # Get Help
+# ============================================
 get_help_title: "📞 Get Help:"
 get_help_github: "   🐙 GitHub: https://github.com/Jxpro/custom-rustdesk"
 get_help_email: "   📧 Email: jxpro@qq.com"

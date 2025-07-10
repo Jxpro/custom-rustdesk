@@ -23,6 +23,7 @@
 *   🔒 生成加密后的自定义 ID
 *   🔓 对加密后的 ID 进行解密验证
 *   🔑 使用 UUID 作为加密和解密密钥
+*   📋 自动复制加密/解密结果到剪贴板
 *   💬 交互式模式，操作简便
 *   📚 完善的帮助系统
 *   🌍 多语言支持（中文/英文）
@@ -255,6 +256,7 @@ $ ./custom-rustdesk-macos-universal --id 测试电脑
 
 ✅ 使用此 UUID？(y/n): [直接按回车或输入y]
 "测试电脑" 已加密为 "00u33upzDoDQeMfJZ36o3owBtJ0Ip8qKr2dff8qsbAug=="
+✅ 已复制到剪切板
 📝 请将配置文件中的 id 替换为 enc_id 字段
 ```
 
@@ -262,6 +264,7 @@ $ ./custom-rustdesk-macos-universal --id 测试电脑
 ```bash
 $ ./custom-rustdesk-macos-universal --id 测试电脑 --uuid 12345678-1234-1234-1234-123456789012
 "测试电脑" 已加密为 "00M72xC5id8C/F+IsG6VOWs5MEV2xhPI/nBBo="
+✅ 已复制到剪切板
 📝 请将配置文件中的 id 替换为 enc_id 字段
 ```
 

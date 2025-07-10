@@ -1,6 +1,7 @@
 use super::crypto::{decrypt, encrypt};
 use super::validation::{validate_custom_id, validate_encrypted_id, validate_uuid};
 use rust_i18n::t;
+use clipboard::{ClipboardContext, ClipboardProvider};
 
 /// 加密操作结果
 #[derive(Debug, Clone)]
@@ -71,6 +72,19 @@ pub fn perform_decrypt(enc_id: &str, uuid: &str) -> DecryptResult {
     }
 }
 
+/// 复制文本到剪切板
+fn copy_to_clipboard(text: &str) -> Result<(), String> {
+    match ClipboardContext::new() {
+        Ok(mut ctx) => {
+            match ctx.set_contents(text.to_owned()) {
+                Ok(_) => Ok(()),
+                Err(e) => Err(format!("复制到剪切板失败: {}", e)),
+            }
+        }
+        Err(e) => Err(format!("无法访问剪切板: {}", e)),
+    }
+}
+
 /// 显示加密成功结果
 pub fn display_encrypt_success(result: &EncryptResult) {
     if let EncryptResult::Success {
@@ -86,6 +100,13 @@ pub fn display_encrypt_success(result: &EncryptResult) {
                 encrypted_id = encrypted_id
             )
         );
+        
+        // 尝试复制加密ID到剪切板
+        match copy_to_clipboard(encrypted_id) {
+            Ok(_) => println!("{}", t!("clipboard_copy_success")),
+            Err(_) => println!("{}", t!("clipboard_copy_failed")),
+        }
+        
         println!("{}", t!("replace_id_prompt"));
     }
 }
@@ -105,6 +126,13 @@ pub fn display_decrypt_success(result: &DecryptResult) {
                 decrypted_id = decrypted_id
             )
         );
+        
+        // 尝试复制解密ID到剪切板
+        match copy_to_clipboard(decrypted_id) {
+            Ok(_) => println!("{}", t!("clipboard_copy_success")),
+            Err(_) => println!("{}", t!("clipboard_copy_failed")),
+        }
+        
         println!("{}", t!("compare_id_prompt"));
     }
 }

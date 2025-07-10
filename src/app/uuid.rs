@@ -3,6 +3,7 @@ use rust_i18n::t;
 use std::io::{self, Write};
 
 /// UUID 处理结果
+#[derive(Debug, Clone)]
 pub enum UuidResult {
     /// 成功获取 UUID
     Success(String),

@@ -1,10 +1,10 @@
 use crate::app::help::show_help;
 use crate::app::interactive::show_interactive_menu;
-use crate::app::operations::{
+use crate::app::uuid::{get_uuid_with_confirmation, UuidResult};
+use crate::core::operations::{
     display_decrypt_success, display_encrypt_success, display_error, perform_decrypt,
     perform_encrypt,
 };
-use crate::app::uuid::{get_uuid_with_confirmation, UuidResult};
 use clap::Parser;
 use rust_i18n::t;
 
@@ -76,20 +76,20 @@ fn run_with_uuid(cli: &Cli, uuid: &str) {
     if let Some(ref custom_id) = cli.id {
         let result = perform_encrypt(custom_id, uuid);
         match result {
-            crate::app::operations::EncryptResult::Success { .. } => {
+            crate::core::operations::EncryptResult::Success { .. } => {
                 display_encrypt_success(&result);
             }
-            crate::app::operations::EncryptResult::Error(error_msg) => {
+            crate::core::operations::EncryptResult::Error(error_msg) => {
                 display_error(&error_msg);
             }
         }
     } else if let Some(ref enc_id) = cli.eid {
         let result = perform_decrypt(enc_id, uuid);
         match result {
-            crate::app::operations::DecryptResult::Success { .. } => {
+            crate::core::operations::DecryptResult::Success { .. } => {
                 display_decrypt_success(&result);
             }
-            crate::app::operations::DecryptResult::Error(error_msg) => {
+            crate::core::operations::DecryptResult::Error(error_msg) => {
                 display_error(&error_msg);
             }
         }

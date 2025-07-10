@@ -10,6 +10,7 @@ clap = { version = "3.2.22", features = ["derive"] }
 sodiumoxide = "0.2"
 rust-i18n = "2.2.2"
 machine-uid = "0.5.3"
+regex = "1.0"
 
 [build-dependencies]
 rust-i18n = "2.2.2"

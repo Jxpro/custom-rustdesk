@@ -1,7 +1,9 @@
-use crate::core::crypto::{decrypt, encrypt};
+use super::crypto::{decrypt, encrypt};
+use super::validation::{validate_custom_id, validate_encrypted_id, validate_uuid};
 use rust_i18n::t;
 
 /// 加密操作结果
+#[derive(Debug, Clone)]
 pub enum EncryptResult {
     Success {
         original_id: String,
@@ -11,6 +13,7 @@ pub enum EncryptResult {
 }
 
 /// 解密操作结果
+#[derive(Debug, Clone)]
 pub enum DecryptResult {
     Success {
         encrypted_id: String,
@@ -21,17 +24,35 @@ pub enum DecryptResult {
 
 /// 执行加密操作
 pub fn perform_encrypt(custom_id: &str, uuid: &str) -> EncryptResult {
+    // 输入验证
+    if let Err(e) = validate_custom_id(custom_id) {
+        return EncryptResult::Error(format!("{}", e));
+    }
+
+    if let Err(e) = validate_uuid(uuid) {
+        return EncryptResult::Error(format!("{}", e));
+    }
+
     match encrypt(custom_id.as_bytes(), uuid) {
         Ok(encrypted_string) => EncryptResult::Success {
             original_id: custom_id.to_string(),
             encrypted_id: encrypted_string,
         },
-        Err(_) => EncryptResult::Error(t!("encryption_error")),
+        Err(_) => EncryptResult::Error(format!("{}", t!("encryption_error"))),
     }
 }
 
 /// 执行解密操作
 pub fn perform_decrypt(enc_id: &str, uuid: &str) -> DecryptResult {
+    // 输入验证
+    if let Err(e) = validate_encrypted_id(enc_id) {
+        return DecryptResult::Error(format!("{}", e));
+    }
+
+    if let Err(e) = validate_uuid(uuid) {
+        return DecryptResult::Error(format!("{}", e));
+    }
+
     if enc_id.len() < 2 {
         return DecryptResult::Error(t!("invalid_encrypted_id_format"));
     }
@@ -42,9 +63,11 @@ pub fn perform_decrypt(enc_id: &str, uuid: &str) -> DecryptResult {
                 encrypted_id: enc_id.to_string(),
                 decrypted_id,
             },
-            Err(_) => DecryptResult::Error(t!("invalid_decryption_result_error")),
+            Err(e) => {
+                DecryptResult::Error(format!("{}: {}", t!("invalid_decryption_result_error"), e))
+            }
         },
-        Err(_) => DecryptResult::Error(t!("decryption_error")),
+        Err(_) => DecryptResult::Error(format!("{}", t!("decryption_error"))),
     }
 }
 

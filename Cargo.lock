@@ -129,6 +129,7 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "machine-uid",
+ "regex",
  "rust-i18n",
  "sodiumoxide",
 ]

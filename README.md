@@ -1,6 +1,6 @@
 # RustDesk Custom ID Tool
 
-## Introduction
+## 📖 Introduction
 
 >   Note that if a certain ID is invalid and reset, it may be that the ID is too short or occupied, please try a different ID.
 
@@ -20,18 +20,18 @@ When running in service mode in Windows, specified by `--service` :
 
 -   `C:\Windows\ServiceProfiles\LocalService\AppData\Roaming\RustDesk\config\RustDesk.toml`
 
-## Features
--   Generate encrypted custom ID
--   Decrypt and validate encrypted ID
--   Use UUID as the encryption and decryption key
--   Interactive mode for easy operation
--   Comprehensive help system
--   Multi-language support (English/Chinese)
--   Command-line interface with detailed parameter descriptions
+## ✨ Features
+-   🔒 Generate encrypted custom ID
+-   🔓 Decrypt and validate encrypted ID
+-   🔑 Use UUID as the encryption and decryption key
+-   💬 Interactive mode for easy operation
+-   📚 Comprehensive help system
+-   🌍 Multi-language support (English/Chinese)
+-   ⌨️ Command-line interface with detailed parameter descriptions
 
-## Installation & Getting Started
+## 🚀 Installation & Getting Started
 
-### Option 1: Download Pre-built Binaries (Recommended)
+### 📦 Option 1: Download Pre-built Binaries (Recommended)
 
 The easiest way to get started is to download the pre-built binaries from our releases page:
 
@@ -56,15 +56,15 @@ Available platforms:
    ./custom-rustdesk-macos-universal --id 123456 --uuid your-uuid-here
    ```
 
-### Option 2: Build from Source
+### 🔨 Option 2: Build from Source
 
 If you prefer to build from source or need to modify the code:
 
-#### Prerequisites
+#### 📋 Prerequisites
 - [Rust](https://rustup.rs/) (latest stable version)
 - Git
 
-#### Build Steps
+#### 🛠️ Build Steps
 
 1. **Clone the repository:**
    ```bash
@@ -86,15 +86,15 @@ If you prefer to build from source or need to modify the code:
    ./target/release/custom-rustdesk
    ```
 
-#### Development Build
+#### 🧪 Development Build
 For development purposes, you can run directly with cargo:
 ```bash
 cargo run
 ```
 
-## Usage
+## 📘 Usage
 
-### Interactive Mode
+### 💬 Interactive Mode
 
 Run without parameters to enter interactive mode:
 
@@ -112,7 +112,7 @@ The interactive menu provides:
 3. **View Help**: Display comprehensive help information
 4. **Exit**: Quit the application
 
-### Command Line Mode
+### ⌨️ Command Line Mode
 
 The tool supports both command-line and interactive modes. For command-line usage:
 
@@ -144,7 +144,7 @@ cargo run -- --lang zh
 cargo run -- --help
 ```
 
-#### Command Line Parameters
+#### 📝 Command Line Parameters
 
 - `-i, --id <ID>`: Custom ID to encrypt
 - `-e, --eid <EID>`: Encrypted ID to decrypt
@@ -152,14 +152,14 @@ cargo run -- --help
 - `-l, --lang <LANG>`: Set the language (en/zh) [default: en]
 - `-h, --help`: Show detailed help information
 
-### Language Support
+### 🌍 Language Support
 
 The tool supports both English and Chinese:
 - Default language is English
 - Use `--lang zh` for Chinese interface
 - Language setting affects all output including help text and error messages
 
-### Getting UUID
+### 🔍 Getting UUID
 
 >   You can get more information at the official tool [machine-uid](https://github.com/rustdesk-org/machine-uid)
 
@@ -176,7 +176,7 @@ The tool supports both English and Chinese:
     -   Enter the following command: `ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID`
     -   Copy the UUID from the output as the `uuid` parameter.
 
-### Validate UUID
+### ✅ Validate UUID
 
 1.  Download the pre-built binary or clone the code locally.
 2.  Find the `enc_id` field in the respective configuration file.
@@ -190,7 +190,7 @@ The tool supports both English and Chinese:
     ```
 4.  The program will output the decrypted ID, compare it with the current ID to check consistency.
 
-### Customize ID
+### 🎯 Customize ID
 
 1.  Download the pre-built binary or clone the code locally.
 2.  Run the encryption command:
@@ -213,7 +213,7 @@ Example of program execution:
 cargo run -- --id 123456 --uuid 12345678-1234-1234-1234-123456789012
 ```
 
-## Encryption Process
+## 🔐 Encryption Process
 
 This program uses the `crypto::secretbox` module in the `sodiumoxide` library for symmetric encryption. The encryption key comes from the provided UUID string.
 
@@ -224,7 +224,7 @@ This program uses the `crypto::secretbox` module in the `sodiumoxide` library fo
 5.  Use the `secretbox::seal` or `secretbox::open` function for encryption or decryption.
 6.  Convert the encrypted byte array to a `base64` encoded string and output it to the console.
 
-## Contributing
+## 🤝 Contributing
 
 You are welcome to contribute to this project! You can participate in the following ways:
 
@@ -232,6 +232,6 @@ You are welcome to contribute to this project! You can participate in the follow
 -   Provide feedback and suggestions
 -   Help promote the project
 
-## Contact
+## 📧 Contact
 
 If you have any questions, feel free to discuss on [github issue](https://github.com/Jxpro/custom-rustdesk/issues), or send an email to [jxpro@qq.com](mailto:jxpro@qq.com) to contact me.

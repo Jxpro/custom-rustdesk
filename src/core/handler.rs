@@ -101,8 +101,9 @@ pub fn display_encrypt_success(result: &EncryptResult) {
             )
         );
         
-        // 尝试复制加密ID到剪切板
-        match copy_to_clipboard(encrypted_id) {
+        // 尝试复制加密ID到剪切板（包含00前缀）
+        let full_encrypted_id = format!("00{}", encrypted_id);
+        match copy_to_clipboard(&full_encrypted_id) {
             Ok(_) => println!("{}", t!("clipboard_copy_success")),
             Err(_) => println!("{}", t!("clipboard_copy_failed")),
         }

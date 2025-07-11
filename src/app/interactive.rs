@@ -1,7 +1,10 @@
 use crate::app::help::show_help;
 use crate::app::input::{is_empty_input, prompt_input};
 use crate::app::uuid::get_uuid_input;
-use crate::core::crypto::{decrypt, encrypt};
+use crate::core::handler::{
+    display_decrypt_success, display_encrypt_success, display_error, perform_decrypt,
+    perform_encrypt, DecryptResult, EncryptResult,
+};
 use rust_i18n::t;
 
 /// 显示交互式主菜单
@@ -103,13 +106,10 @@ fn handle_encrypt_mode(_lang: &str) {
     }
 
     // 执行加密
-    match encrypt(custom_id.as_bytes(), &uuid) {
-        Ok(encrypted_string) => {
-            let final_id = format!("00{}", encrypted_string);
-            println!();
-            println!("{}", t!("encrypt_success"));
-            println!("{}", t!("original_id", id = custom_id));
-            println!("{}", t!("encrypted_id", id = final_id));
+    let result = perform_encrypt(&custom_id, &uuid);
+    match result {
+        EncryptResult::Success { .. } => {
+            display_encrypt_success(&result);
             println!();
             println!("{}", t!("usage_instructions"));
             println!("{}", t!("usage_1"));
@@ -117,8 +117,8 @@ fn handle_encrypt_mode(_lang: &str) {
             println!("{}", t!("usage_3"));
             println!("{}", t!("usage_4"));
         }
-        Err(_) => {
-            println!("{}", t!("encrypt_error"));
+        EncryptResult::Error(error_msg) => {
+            display_error(&error_msg);
         }
     }
 }
@@ -149,22 +149,13 @@ fn handle_decrypt_mode(_lang: &str) {
     }
 
     // 执行解密
-    match decrypt(&enc_id.as_bytes()[2..], &uuid) {
-        Ok(decrypted_bytes) => match String::from_utf8(decrypted_bytes) {
-            Ok(decrypted_id) => {
-                println!();
-                println!("{}", t!("decrypt_success_title"));
-                println!("{}", t!("encrypted_id_label", id = enc_id));
-                println!("{}", t!("original_id_label", id = decrypted_id));
-                println!();
-                println!("{}", t!("compare_id_suggestion"));
-            }
-            Err(_) => {
-                println!("{}", t!("invalid_decryption_result_error"));
-            }
-        },
-        Err(_) => {
-            println!("{}", t!("decryption_failed_error"));
+    let result = perform_decrypt(&enc_id, &uuid);
+    match result {
+        DecryptResult::Success { .. } => {
+            display_decrypt_success(&result);
+        }
+        DecryptResult::Error(error_msg) => {
+            display_error(&error_msg);
         }
     }
 }

@@ -11,7 +11,7 @@ sodiumoxide = "0.2"
 rust-i18n = "2.2.2"
 machine-uid = "0.5.3"
 regex = "1.0"
-clipboard = "0.5"
+arboard = "3.6"
 
 [build-dependencies]
 rust-i18n = "2.2.2"

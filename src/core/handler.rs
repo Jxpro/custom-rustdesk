@@ -1,7 +1,7 @@
 use super::crypto::{decrypt, encrypt};
 use super::validation::{validate_custom_id, validate_encrypted_id, validate_uuid};
 use rust_i18n::t;
-use clipboard::{ClipboardContext, ClipboardProvider};
+use arboard::Clipboard;
 
 /// 加密操作结果
 #[derive(Debug, Clone)]
@@ -74,9 +74,9 @@ pub fn perform_decrypt(enc_id: &str, uuid: &str) -> DecryptResult {
 
 /// 复制文本到剪切板
 fn copy_to_clipboard(text: &str) -> Result<(), String> {
-    match ClipboardContext::new() {
-        Ok(mut ctx) => {
-            match ctx.set_contents(text.to_owned()) {
+    match Clipboard::new() {
+        Ok(mut clipboard) => {
+            match clipboard.set_text(text) {
                 Ok(_) => Ok(()),
                 Err(e) => Err(format!("复制到剪切板失败: {}", e)),
             }

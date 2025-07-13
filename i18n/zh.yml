@@ -156,3 +156,24 @@ note_3: "   3. 🔄 修改配置文件后需要重启 RustDesk 服务"
 get_help_title: "📞 获取帮助："
 get_help_github: "   🐙 GitHub: https://github.com/Jxpro/custom-rustdesk"
 get_help_email: "   📧 Email: jxpro@qq.com"
+
+# ============================================
+# 验证错误
+# ============================================
+validation_error: "验证错误"
+validation_error_uuid_empty: "UUID 不能为空"
+validation_error_uuid_format: "UUID 格式无效，应为 xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 格式或 32 位十六进制字符格式"
+validation_error_encrypted_id_empty: "加密 ID 不能为空"
+validation_error_encrypted_id_length: "加密 ID 长度不足"
+validation_error_encrypted_id_chars: "加密 ID 包含无效字符"
+validation_error_custom_id_empty: "自定义 ID 不能为空"
+validation_error_custom_id_length: "自定义 ID 长度不能超过 100 个字符"
+validation_error_custom_id_control_chars: "自定义 ID 不能包含控制字符"
+
+# ============================================
+# 系统错误
+# ============================================
+clipboard_copy_error: "复制到剪切板失败"
+clipboard_access_error: "无法访问剪切板"
+regex_compile_error_standard: "标准 UUID 正则表达式编译失败"
+regex_compile_error_linux: "Linux UUID 正则表达式编译失败"

@@ -33,10 +33,10 @@ pub fn get_uuid_with_confirmation() -> UuidResult {
                 let choice = choice.trim().to_lowercase();
 
                 match choice.as_str() {
-                    "" | "y" | "yes" | "是" => {
+                    "" | "y" | "yes" => {
                         return UuidResult::Success(machine_uuid);
                     }
-                    "n" | "no" | "否" => {
+                    "n" | "no" => {
                         println!("{}", t!("manual_uuid_required"));
                         break;
                     }

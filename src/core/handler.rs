@@ -78,10 +78,10 @@ fn copy_to_clipboard(text: &str) -> Result<(), String> {
         Ok(mut clipboard) => {
             match clipboard.set_text(text) {
                 Ok(_) => Ok(()),
-                Err(e) => Err(format!("复制到剪切板失败: {}", e)),
+                Err(e) => Err(format!("{}: {}", t!("clipboard_copy_error"), e)),
             }
         }
-        Err(e) => Err(format!("无法访问剪切板: {}", e)),
+        Err(e) => Err(format!("{}: {}", t!("clipboard_access_error"), e)),
     }
 }
 

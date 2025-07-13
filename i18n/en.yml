@@ -156,3 +156,24 @@ note_3: "   3. 🔄 The RustDesk service needs to be restarted after modifying t
 get_help_title: "📞 Get Help:"
 get_help_github: "   🐙 GitHub: https://github.com/Jxpro/custom-rustdesk"
 get_help_email: "   📧 Email: jxpro@qq.com"
+
+# ============================================
+# Validation Errors
+# ============================================
+validation_error: "Validation Error"
+validation_error_uuid_empty: "UUID cannot be empty"
+validation_error_uuid_format: "Invalid UUID format, should be xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx format or 32-character hexadecimal format"
+validation_error_encrypted_id_empty: "Encrypted ID cannot be empty"
+validation_error_encrypted_id_length: "Encrypted ID length is insufficient"
+validation_error_encrypted_id_chars: "Encrypted ID contains invalid characters"
+validation_error_custom_id_empty: "Custom ID cannot be empty"
+validation_error_custom_id_length: "Custom ID length cannot exceed 100 characters"
+validation_error_custom_id_control_chars: "Custom ID cannot contain control characters"
+
+# ============================================
+# System Errors
+# ============================================
+clipboard_copy_error: "Failed to copy to clipboard"
+clipboard_access_error: "Unable to access clipboard"
+regex_compile_error_standard: "Failed to compile standard UUID regex"
+regex_compile_error_linux: "Failed to compile Linux UUID regex"

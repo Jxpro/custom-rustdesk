@@ -36,10 +36,10 @@ encrypt_error: "❌ An error occurred during encryption, please check your input
 # Usage Instructions
 # ============================================
 usage_instructions: "📝 Usage Instructions:"
-usage_1: "   1. 📋 Copy the encrypted ID above."
-usage_2: "   2. 📂 Open the RustDesk configuration file."
-usage_3: "   3. ✏️ Replace the enc_id field with the encrypted ID."
-usage_4: "   4. 🔄 Restart the RustDesk service."
+usage_1: "   1. 📂 Open the RustDesk configuration file."
+usage_2: "   2. ✏️ Replace the enc_id field with the encrypted ID."
+usage_3: "   3. 🔄 Restart the RustDesk service."
+usage_4: "   4. 🎉 Now you can connect using your custom ID!"
 
 # ============================================
 # Decryption Mode
@@ -140,6 +140,7 @@ cli_example_help: "   cargo run -- --lang zh --help"
 config_file_location_title: "📁 Config File Location:"
 config_file_location_macos: "   🍎 macOS: ~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml"
 config_file_location_windows: "   🪟 Windows: C:\\Users\\Username\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml"
+config_file_location_windows_service: "   🪟 Windows (Service Mode): C:\\Windows\\ServiceProfiles\\LocalService\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml"
 
 # ============================================
 # Notes

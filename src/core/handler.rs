@@ -108,7 +108,18 @@ pub fn display_encrypt_success(result: &EncryptResult) {
             Err(_) => println!("{}", t!("clipboard_copy_failed")),
         }
         
-        println!("{}", t!("replace_id_prompt"));
+        // 显示详细的使用说明
+        println!();
+        println!("{}", t!("usage_instructions"));
+        println!("{}", t!("usage_1"));
+        println!("{}", t!("usage_2"));
+        println!("{}", t!("usage_3"));
+        println!("{}", t!("usage_4"));
+        println!();
+        println!("{}", t!("config_file_location_title"));
+        println!("{}", t!("config_file_location_macos"));
+        println!("{}", t!("config_file_location_windows"));
+        println!("{}", t!("config_file_location_windows_service"));
     }
 }
 

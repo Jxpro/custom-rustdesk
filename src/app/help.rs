@@ -56,6 +56,7 @@ fn show_config_file_location() {
     println!("{}", t!("config_file_location_title"));
     println!("{}", t!("config_file_location_macos"));
     println!("{}", t!("config_file_location_windows"));
+    println!("{}", t!("config_file_location_windows_service"));
     println!();
 }
 

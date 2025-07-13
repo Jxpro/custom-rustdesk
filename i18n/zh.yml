@@ -36,10 +36,10 @@ encrypt_error: "❌ 加密过程中发生错误，请检查输入是否正确。
 # 使用说明
 # ============================================
 usage_instructions: "📝 使用说明："
-usage_1: "   1. 📋 复制上面的加密 ID。"
-usage_2: "   2. 📂 打开 RustDesk 配置文件。"
-usage_3: "   3. ✏️ 将 enc_id 字段替换为加密 ID。"
-usage_4: "   4. 🔄 重启 RustDesk 服务。"
+usage_1: "   1. 📂 打开 RustDesk 配置文件。"
+usage_2: "   2. ✏️ 将 enc_id 字段替换为加密 ID。"
+usage_3: "   3. 🔄 重启 RustDesk 服务。"
+usage_4: "   4. 🎉 现在您可以使用自定义 ID 连接了！"
 
 # ============================================
 # 解密模式
@@ -140,6 +140,7 @@ cli_example_help: "   cargo run -- --lang zh --help"
 config_file_location_title: "📁 配置文件位置："
 config_file_location_macos: "   🍎 macOS: ~/Library/Preferences/com.carriez.RustDesk/RustDesk.toml"
 config_file_location_windows: "   🪟 Windows: C:\\Users\\Username\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml"
+config_file_location_windows_service: "   🪟 Windows（服务模式）: C:\\Windows\\ServiceProfiles\\LocalService\\AppData\\Roaming\\RustDesk\\config\\RustDesk.toml"
 
 # ============================================
 # 注意事项

@@ -110,12 +110,6 @@ fn handle_encrypt_mode(_lang: &str) {
     match result {
         EncryptResult::Success { .. } => {
             display_encrypt_success(&result);
-            println!();
-            println!("{}", t!("usage_instructions"));
-            println!("{}", t!("usage_1"));
-            println!("{}", t!("usage_2"));
-            println!("{}", t!("usage_3"));
-            println!("{}", t!("usage_4"));
         }
         EncryptResult::Error(error_msg) => {
             display_error(&error_msg);
